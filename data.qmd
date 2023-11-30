@@ -4,9 +4,9 @@ format: html
 editor: visual
 ---
 
-# 2. Tourism Data
+# Tourism Data
 
-## 2.1 Technical Description
+## Technical Description
 
 For our project, we will use data on global tourism and related variables and indicators to study the effect tourism has on countries around the world. The main tourism-specific data that we will be using comes from the United Nations World Tourism Organization ([UNWTO](https://www.unwto.org/tourism-statistics/key-tourism-statistics)). We will draw data from their "Tourism Statistics Database", from which we will use five tables containing tourism indicators for each country. The tables have data for Inbound Tourism, Domestic Tourism, Outbound Tourism, Tourism Industries, and Employment. Inbound, Domestic, and Outbound Tourism tables have data on arrivals, accommodation, expenditure, and departures. We will focus on inbound arrivals and employment. The data provides indicators by country, with values (in thousands) for each indicator from 1995-2022. Countries are listed in the same column as the indicators, with the same indicators for each country following in the rows after the country name. Therefore, to make this data useful for graphing, we will need to do quite a bit of engineering to organize indicators. The data is collected yearly from countries by the UNWTO, with the most recent data update taking place October 2023. However, our data is yearly and thus only goes until 2022, since the full data for 2023 is not yet available. Further, the data requires that each individual country accurately and routinely tracks tourism data and then reports it to the United Nations, and thus there is a large amount of missing data for many countries, especially in earlier years. In fact, the UN did not outline their [International Recommendations for Tourism Statistics (IRTS 2008)](https://unstats.un.org/unsd/publication/seriesm/seriesm_83rev1e.pdf) until 2008, and the World Tourism Organization only became an agency of the UN in 2004, so data was not as regulated before these years.
 
@@ -18,7 +18,7 @@ Finally, we will use happiness data from the [World Happiness Report](https://wo
 
 For all data, we will download excel or csv files and read them as data frames. The indicator data (economy, climate, happiness) will not need much engineering beyond missing values. UNWTO data will need to be pivoted. Then, data will be joined by country name to conduct our analysis and create graphs.
 
-## 2.2 Research Plan
+## Research Plan
 
 Based on our multi-faceted approach to understanding tourism, we plan to use the following data sources to answer our research questions:
 
@@ -70,7 +70,7 @@ Based on our multi-faceted approach to understanding tourism, we plan to use the
 
     -   We can also leverage this data to determine if there are coinciding trends between climate and US tourism
 
-## 2.3 Missing value analysis
+## Missing value analysis
 
 ### UNWTO Tourism Data
 
