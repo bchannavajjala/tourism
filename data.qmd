@@ -2,4 +2,54 @@
 
 ## Description
 
+Based on our multi-faceted approach to understanding tourism, we plan to use the following data sources to answer our research questions:
+
+**Tourism by Country:**
+
+-   UNWTO Statistics: <https://www.unwto.org/tourism-statistics/key-tourism-statistics>
+
+    -   This dataset contains information on inbound, domestic and outbound tourism for countries around the world
+
+    -   For inbound tourism, UNWTO provides data on travel purpose, mode of transportation, traveler accommodations, and tourism expenditure
+
+    -   The dataset also contains expenditure information for domestic and outbound travels
+
+    -   We will use this data to identify trends in inbound, domestic and outbound travel across countries and larger regions. Visualizing the inbound expenditures data, especially, enables us to understand how much tourists contribute to local economies at a high level
+
+**Tourism and the Economy:**
+
+-   IMF GDP Growth: [https://www.imf.org/external/datamapper/NGDP_RPCH\@WEO/OEMDC/ADVEC/WEOWORLD](https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/OEMDC/ADVEC/WEOWORLD)
+
+    -   This dataset captures the annual percent change in GDP for all countries from 1980 through 2023, with predictions until 2028. We can use the dataset to identify the overall trend in GDP across countries, as a baseline for understanding how tourism may factor into it.
+
+-   Statista Travel GDP Contributions: <https://www.statista.com/statistics/233223/travel-and-tourism--total-economic-contribution-worldwide/> & <https://www.statista.com/statistics/292479/total-contribution-of-travel-and-tourism-to-gdp-in-selected-countries/>
+
+    -   These datasets detail the contribution of travel to worldwide GDP, along with a future prediction of tourism and travel contributions
+
+    -   We also see a breakdown of travel and tourism contributions to GDP for leading travel markets. We plan to pair this data with the inbound tourism expenditures and annual change in GDP to understand whether travel could contribute to changes in GDP.
+
+-   UNWTO Tourism Contribution to GDP: <https://www.unwto.org/tourism-statistics/economic-contribution-SDG>
+
+    -   This site contains data on what percentage of each country's GDP is contributed by tourism. As with other sources listed above, we can use this data to determine which countries rely more on tourism. We can then pair the data with other sources to understand whether heavily reliant countries are seeing a consistent influx of tourists over time.
+
+**Climate Conditions:**
+
+-   Our World in Data, Tourism Charts: <https://ourworldindata.org/tourism#all-charts>
+
+    -   This site contains data pertaining to per capita CO₂ emissions from commercial aviation, adjusted for tourism, in 2018. While it is not the most current data, we can use this data to understand how travel contributes to CO₂ emissions
+
+-   IMF Climate-Related Disasters Frequency: <https://climatedata.imf.org/datasets/b13b69ee0dde43a99c811f592af4e821/explore>
+
+    -   The IMF aggregated the number of climate-related disasters for each country from 1980 to 2022. Paired with information on tourism GDP and tourist influx, we can understand whether changes in tourism coincide with any climate-related events.
+
+-   Berkeley Earth Global Temperature Data: <https://berkeleyearth.org/data/>
+
+    -   The Berkeley Earth database contains average temperatures (highs, lows and true average) by global regions and select countries. We can use this data to get an idea of how temperatures have have fluctuated across regions and whether the fluctuations coincide with climate-related events or changes in tourism.
+
+-   Comparative Climate Change Data in the US: <https://www.ncei.noaa.gov/products/land-based-station/comparative-climatic-data>
+
+    -   While the data in this site is limited to the United States, we can explore data related to temperature and precipitation to understand climate trends in the US.
+
+    -   We can also leverage this data to determine if there are coinciding trends between climate and US tourism
+
 ## Missing value analysis
