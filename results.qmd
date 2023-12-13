@@ -86,7 +86,27 @@ total_arrivals_2022
 ```
 
 ```{r}
+library(ggplot2)
+library(dplyr)
+
+top_bottom_countries <- total_arrivals_2022 %>%
+  filter(Merged_Column == "Total arrivals") %>%
+  arrange(abs(`2022`)) %>%
+  filter(row_number() <= 10 | row_number() > n() - 10)
+
+ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = `2022`, fill = `2022` > 0)) +
+  geom_bar(stat = "identity", position = "identity", color = "black") +
+  scale_fill_manual(values = c("negative" = "red", "positive" = "blue"),
+                    labels = c("Negative", "Positive")) +
+  labs(title = "Top and Bottom 10 Countries by Total Arrivals in 2022",
+       x = "Country", y = "Total Arrivals") +
+  theme_minimal() +
+  coord_flip()
+```
+
+```{r}
 climate_df <- read.csv("Climate-related_Disasters_Frequency.csv")
+climate_df <- climate_df[,c(1,2,5,11:53)]
 climate_df
 ```
 
