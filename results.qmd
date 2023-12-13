@@ -1,1 +1,112 @@
 # Results
+
+```{r}
+#Read data from excel
+#install.packages("readxl")
+
+library(readxl)
+library(tidyr)
+library(dplyr)
+
+sheet_names <- excel_sheets("unwto-all-data-download_102023.xlsx")
+
+#create a data frame for each sheet and store them in all_dfs
+all_dfs <- lapply(sheet_names, function(sheet) {
+  read_excel("unwto-all-data-download_102023.xlsx", sheet = sheet)
+})
+```
+
+```{r}
+
+#access the desired dataframe from all_dfs
+inbound_arrivals <- as.data.frame(all_dfs[2])
+
+#Cleaning up the data set to remove unnecessary rows and columns, and rename/change type of columns
+cols_to_del = c(-1,-2,-3)
+
+inbound_arrivals <- inbound_arrivals[,cols_to_del]
+
+col_names <- inbound_arrivals[2, ]
+
+inbound_arrivals <- inbound_arrivals[-2, ]
+
+colnames(inbound_arrivals) <- col_names
+
+names(inbound_arrivals)[names(inbound_arrivals)=="Basic data and indicators"] <- "Country"
+
+names(inbound_arrivals)[2:5] <- c("2", "3", "4", "5")
+
+inbound_arrivals <- inbound_arrivals[-1,-37]
+
+inbound_arrivals <- inbound_arrivals %>%
+  mutate_all(~ ifelse(. == "..", NA, .))
+
+columns_indices_to_convert <- 10:36
+
+inbound_arrivals <- inbound_arrivals %>%
+  mutate_at(columns_indices_to_convert, as.numeric)
+```
+
+```{r}
+
+# Replace empty rows for country with the last non-empty value until a new value appears
+inbound_arrivals <- inbound_arrivals %>%
+  fill("Country")
+
+#Merging arrival types into one column
+columns_to_merge <- c("2","3","4","5") 
+
+inbound_arrivals <- inbound_arrivals %>%
+  mutate(Merged_Column = coalesce(!!!syms(columns_to_merge)))
+
+column_names <- names(inbound_arrivals)
+
+#moving the merged column to the front of the dataframe
+last_column <- column_names[length(column_names)]
+
+inbound_arrivals <- inbound_arrivals[, !names(inbound_arrivals) %in% columns_to_merge]
+
+column_to_move <- "Merged_Column"
+new_position <- 2
+
+inbound_arrivals <- inbound_arrivals %>%
+  select(-{{column_to_move}}) %>%
+  mutate({{column_to_move}} := inbound_arrivals[[column_to_move]]) %>%
+  select({{column_to_move}}, everything())
+```
+
+```{r}
+inbound_arrivals
+```
+
+```{r}
+total_arrivals <- subset(inbound_arrivals, Merged_Column == 'Total arrivals')
+total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,33)])
+total_arrivals_2022
+```
+
+```{r}
+climate_df <- read.csv("Climate-related_Disasters_Frequency.csv")
+climate_df
+```
+
+```{r}
+GDP_df <- read_excel("imf-dm-export-20231128.xls") 
+
+GDP_df<-as.data.frame(GDP_df[-1,])
+
+names(GDP_df)[names(GDP_df)=="Real GDP growth (Annual percent change)"] <- "Country"
+
+GDP_df <- GDP_df %>%
+  mutate_all(~ ifelse(. == "no data", NA, .))
+
+GDP_df
+```
+
+```{r}
+happiness_df <- read_excel("DataForFigure2.1WHR2023.xls")
+
+happiness_df<-as.data.frame(happiness_df)
+
+happiness_df
+```
