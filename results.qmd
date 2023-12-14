@@ -194,11 +194,11 @@ ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
   geom_density_ridges(scale = 1.5, alpha = 0.6) +
   theme_ridges() +
   labs(title = "GDP for Top 10 Visited Countries", x = "GDP", y = "Country") +
-  scale_fill_brewer(palette = "Set3") +
+  scale_fill_brewer(palette = "Set3")+
   scale_x_discrete(breaks = desired_values)
 ```
 
-The ridgeline plot above shows us the distribution of GDP for the top ten most visited countries in 2022. The GDP data spans from 2000 to 2022. From this plot, we can see that China has the highest median GDP of the ten countries.
+The ridgeline plot above shows us the distribution of GDP for the top ten most visited countries in 2022. The GDP data spans from 2000 to 2022. From this plot, we can see that China has the highest median GDP of the ten countries. Italy, Denmark, and Canada have the most stark medians, with little tail on either side of the median, meaning there is not much fluctuation in GDP for these countries. Spain and Hungary follow a similar pattern, with just a bit more tails to the left of the median. Greece and Saudi Arabia have the most spread in distribution, with lower peaks and long tails, pointing to the high fluctuation in GDP in the two countries. Croatia and Turkey follow similar distributions as well, with a small mode to the left and a larger mode to the right. Other than China, the other nine countries have similar medians.
 
 ```{r}
 GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+
@@ -206,11 +206,15 @@ GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+The parallel coordinates plot above shows trends in the global happiness study. From all countries studied, we can see that GDP per capita, social support, and healthy life expectancy seem to be linearly related. Economic freedom and support for citizens unsurprisingly lead to a higher life expectancy. Interestingly, there is a negative trend between freedom to make life choices and generosity, meaning countries with higher perceived freedom to make choices report lower scores for generosity, and vice versa. Similarly, there is another negative trend between generosity and perceptions of corruption. Lower generosity generally coincides with higher perceptions of corruption and vice versa. It is important to note that this data comes from polls and is averaged from every poll taken in the country, but it is still interesting to study how different indicators for happiness are generally related. Now we will see how this relates to tourism.
+
 ```{r}
 library(redav)
-happiness_data <- happy_ten[,c(1,7:11)]
+happiness_data <- happy_ten[,c(1,6:11)]
 happiness_data <- na.omit(happiness_data)
 draw_biplot(happiness_data)+
   labs(title = "Happiness Indicators in Most Visited Countries")
 
 ```
+
+In the PCA chart above, we see how the chosen happiness indicators and related, and which indicators are most important in the top 10 most visited countries. We can see that Denmark and Canada have similar levels for each happiness indicator, with the highest values for generosity, social support, and logged GDP per capita. Greece has the lowest rating for generosity and logged GDP per capita, and the highest for perceptions of corruption. It is very interesting to note that when looking at logged GDP per capita, China is number nine out of ten, compared to having the top GDP in the ridgeline plot above. China also has very little social support and the second lowest health life expectancy, only better than Saudi Arabia. Spain falls somewhat central to most indicators, which is surprising as the most visited country in 2022. Perhaps the lack of extremes attracts visitors.
