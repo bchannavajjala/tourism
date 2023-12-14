@@ -184,12 +184,18 @@ ggplotly(p)
 ```
 
 ```{r}
+inbound_arrivals$`1995`<- as.numeric(inbound_arrivals$`1995`)
+
+long_data <- pivot_longer(inbound_arrivals, cols = c(-Merged_Column,-Country, -Units, -Notes, -Series), names_to = "Year", values_to = "Arrivals")
+
+long_data$Year <- as.Date(long_data$Year, format='%Y')
+
 top_four <- c("SPAIN","ITALY","TÜRKIYE","CROATIA")
 
-four_arrivals <- subset(long_data_arrivals, Country %in% top_four)
+long_data_four <- subset(long_data, Country %in% top_four)
+long_data_four <- subset(long_data_four, Merged_Column == "Total arrivals")
 
-ggplot(long_data_arrivals, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
-  geom_line() 
-  facet_wrap(~ Country, scales = "free_y") +
-  labs(x = "X-axis Label", y = "Y-axis Label", title = "Faceted Line Plot")
+ggplot(long_data_four, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
+  geom_point() +
+  facet_wrap(~ Country, scales = "free_y")
 ```
