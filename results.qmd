@@ -89,8 +89,9 @@ top_bottom_countries <- total_arrivals_2022 %>%
   arrange(abs(`2022`)) %>%
   filter(row_number() <= 10 | row_number() > n() - 10)
 
-ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = `2022`, fill = `2022` > 0)) +
+ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = (`2022`)*1000, fill = `2022` > 0)) +
   geom_bar(stat = "identity", position = "identity", color = "black") +
+  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
   scale_fill_manual(values = c("negative" = "red", "positive" = "blue"),
                     labels = c("Negative", "Positive")) +
   labs(title = "Top and Bottom 10 Countries by Total Arrivals in 2022",
@@ -98,6 +99,8 @@ ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = `2022`, fill 
   theme_minimal() +
   coord_flip()
 ```
+
+In the plot above, we can see the top 10 and bottom 10 countries with the most and least total arrivals in 2022. Spain tops the list with over 100 million arrivals in 2022. In second place, Italy had almost 75 million arrivals. Spain and Italy had by far the most arrivals, with places three through ten having around 50 million or less arrivals in 2022. It is not surprising that the most visited countries are in Europe, since travel within Europe is very common for European Union citizens. Similarly, Malaysia and Saudi Arabia are quite central countries, each surrounded by many other countries, leading us to believe that neighboring citizens may travel to these two countries often.
 
 ```{r}
 inbound_arrivals$`1995`<- as.numeric(inbound_arrivals$`1995`)
@@ -111,11 +114,14 @@ top_four <- c("SPAIN","ITALY","TÜRKIYE","CROATIA")
 long_data_four <- subset(long_data, Country %in% top_four)
 long_data_four <- subset(long_data_four, Merged_Column == "Total arrivals")
 
-ggplot(long_data_four, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
+ggplot(long_data_four, aes(x = Year, y = (Arrivals)*1000, group = Country, color = Country)) +
   geom_point() +
   facet_wrap(~ Country, scales = "free_y")+
-  labs(title="Visits since 1995 in most popular countries")
+  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
+  labs(title="Visits since 1995 in most popular countries", y= "Arrivals")
 ```
+
+Looking at the top four visited countries in 2022, we see that they have all seen significant growth in visitors since 1995. Italy is somewhat of an exception, with a more steady flow of inbound travelers from 1995 to around 2010. Turkey and Croatia have seen the largest growth in arrivals since 1995. Croatia and Spain both had small peaks around 2008. Of course, all countries had a dramatic drop in arrivals in 2020 and 2021, with a large jump in 2022, as pandemic travel restrictions have relaxed. Turkey did have more fluctuation than the other countries even before 2020, perhaps due to the earthquake in 2017.
 
 ```{r}
 climate_df <- read.csv("Climate-related_Disasters_Frequency.csv")
@@ -162,7 +168,7 @@ long_data_arrivals$Year <- as.Date(long_data_arrivals$Year, format='%Y')
 ```{r}
 library(ggridges)
 
-top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China","Malaysia","Saudi Arabia")
+top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China, People's Republic of","Malaysia","Saudi Arabia")
 
 GDP_ten <- subset(long_data_GDP, Country %in% top_ten_arrivals)
 GDP_ten$GDP <- as.numeric(GDP_ten$GDP)
@@ -173,12 +179,14 @@ ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
   geom_density_ridges(scale = 1.5, alpha = 0.6) +
   theme_ridges() +
   labs(title = "Top 10 Arrivals GDP", x = "GDP", y = "Country") +
-  scale_fill_brewer(palette = "Set1")
+  scale_fill_brewer(palette = "Set3")
   scale_x_discrete(breaks = desired_values)
 ```
 
+In the ridgeline plots above, we see the GDP distribution for the top ten most visited countries in 2022. GDP data dates from 1980 to 2022. We can see that the median GDP of these countries are all quite comparable, with only China, Malaysia, and Turkey having a bit higher medians than the other seven countries. It is interesting to note trends in GDP for countries that can be grouped together. For instance, Italy, Spain, and Denmark may be considered Western and Southern European, and they all have similar trends in GDP distribution, with one stark mode and very small tails. Countries in Eastern Europe, namely Hungary, Greece, Croatia, and even Turkey (though most of Turkey is part of Asia), have similar trends as well, with one main mode, but some trailing data to the left of the mode. The three other Asian countries stand somewhat on their own, as they are all spread far across the continent and have very different economies. It is interesting to note the spread of GDP in Saudi Arabia, meaning that GDP has fluctuated greatly in the country since 1995.
+
 ```{r}
-GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+
+GGally::ggparcoord(data=happiness_df,columns = 7:11, scale="std", alphaLines = 0.5)+
   labs(title = "Happiness indicators in all countries", x = "Indicators", y = "Value")
 ```
 
@@ -197,7 +205,7 @@ library(plotly)
 library(GGally)
 
 p <- ggparcoord(happy_ten,
-    columns = 6:11, group = 1, scale = "std")+
+    columns = 7:11, group = 1, scale = "std")+
   labs(title = "Happiness Indicators in Top 10 Visited Countries", x = "Indicator", y = "Value")+
   theme(axis.text.y = element_text(angle = 45, hjust = 1))
 
