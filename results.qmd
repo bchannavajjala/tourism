@@ -319,9 +319,11 @@ ggplot(expenditures_top20, aes(x = as.factor(Year), y = Country, fill = Expendit
 
 ```
 
-We have seen how tourism effects GDP, now, conversely, we want to see how much certain countries spend on tourism. In the first heatmap, we can see that the spend on tourism in the United States dwarfs that of almost every country. It is possible that the United States is not noted as one of the most visited countries because, being such a large nation, there is a large amount of tourism within the country, which would not contribute to arrivals. Many other countries see more international arrivals due to their size.
+We have seen how tourism effects GDP, now, conversely, we want to see how much certain countries spend on tourism. We will study the top twenty countries in terms of tourism expenditure. In the first heatmap, we can see that the spend on tourism in the United States dwarfs that of almost every country. It is possible that the United States is not noted as one of the most visited countries because, being such a large nation, there is a large amount of tourism within the country, which would not contribute to arrivals. Many other countries see more international arrivals due to their size.
 
-Despite that, the United States still spends the most money on inbound tourism. We can also see in the heatmap that there was a large decline in tourism expenditure in 2020 and 2021 due to Covid-19.
+Despite that, the United States still spends the most money on inbound tourism. We can also see in the heatmap that there was a large decline in tourism expenditure in 2020 and 2021 due to Covid-19. France and Thailand had somewhat significant spending in 2018 and 2019, with only Frnace returning to tourism spending in 2022.
+
+When we remove the United States from the heatmap, it is easier to see which countries are spending the most on inbound tourism. France spends the most of the remaining countries, with Turkey and Italy investing a great deal in 2022. These two countries have certainly seen the payoff, being two of the top ten visited countries in 2022. Perhaps related to the trend in inbound arrivals, Macao spent a lot more money on tourism in 2018 and 2019 compared to post-pandemic years. An increase in spending since the pandemic has payed off for many countries, as Turkey, Saudi Arabia, Italy, and Greece are in the top twenty on spending and the top ten most visited.
 
 ## Climate Disaster Frequencies for World Regions from 2018-2022
 
