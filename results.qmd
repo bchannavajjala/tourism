@@ -4,18 +4,17 @@
 #Read data from excel
 #http://www.sthda.com/english/wiki/reading-data-from-excel-files-xls-xlsx-into-r
 #install.packages("readxl")
+suppressMessages(library(readxl))
+suppressMessages(library(tidyr))
+suppressMessages(library(dplyr))
+suppressMessages(library(ggplot2))
 
-library(readxl)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
-
-sheet_names <- excel_sheets("data_raw/unwto-all-data-download_102023.xlsx")
+suppressMessages(sheet_names <- excel_sheets("data_raw/unwto-all-data-download_102023.xlsx"))
 
 #create a data frame for each sheet and store them in all_dfs
-all_dfs <- lapply(sheet_names, function(sheet) {
+suppressMessages(all_dfs <- lapply(sheet_names, function(sheet) {
   read_excel("data_raw/unwto-all-data-download_102023.xlsx", sheet = sheet)
-})
+}))
 ```
 
 ```{r}
@@ -82,9 +81,9 @@ total_arrivals <- subset(inbound_arrivals, Merged_Column == 'Total arrivals')
 total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,29,30,31,32,33)])
 ```
 
-# 1. Inbound Arrivals
+## Inbound Arrivals
 
-## Top and Bottom 10 Countries by Total Arrivals in 2022
+### Top 10 Countries by Total Arrivals in 2022
 
 ```{r}
 library(ggplot2)
@@ -121,7 +120,7 @@ ggplot(top_countries, aes(x = fct_reorder(Country, Arrivals), y = (Arrivals)*100
 
 In the plots above, we see the top 10 most visited countries by total arrivals for the years 2018-2022. We study these years so that we can see the impact of the pandemic, looking two years before and two years after. Over these five years, the countries in the top ten do not shift very much. The main shift comes from China, where after 2020, visits drop significantly. Macao and Hong Kong drop off of the list entirely by 2022. China was the most visited country in 2018 and 2019, but is overtaken by Italy in 2020 and then Spain in 2021 and 2022. It is not difficult to see the impact of the corona virus pandemic in this data. Not only with countries visited, but also in the number of travelers. The most visited countries decreased by up to four times between 2019 and 2020. Some recovery in travel began in 2021, but was not notable until 2022, especially in Spain.
 
-## Visits from 2000 for 4 most popular countries
+### Visits from 2000 for 4 most popular countries
 
 ```{r}
 inbound_arrivals$`1995`<- as.numeric(inbound_arrivals$`1995`)
@@ -145,7 +144,7 @@ ggplot(long_data_four, aes(x = Year, y = (Arrivals)/1000, group = Country, color
 
 Looking at the top four most visited countries in 2022, we see similar trends in travel from 2000 to 2022. All four countries have seen a great increase in arrivals since 2000. However, Spain and Italy both already had over 60 million arrivals per year starting in 2000, and have only grown since. Croatia was already seeing almost 40 million arrivals per year in 2000, peaking at 60 million in 2019. Turkey has seen the most growth, starting at 10 million arrivals per year in 2000, and peaking over 50 million in both 2019 and 2022. In fact, Turkey is the only country that has returned to its pre-pandemic level of arrivals. All four countries saw a drastic decrease in arrivals in 2020, with 2020 numbers being the lowest recorded since 2000 for Croatia, Italy, and Spain. Turkey has had more fluctuation in travel numbers since 2017, possibly due to earthquakes as well as Covid. Croatia and Spain had small peaks in 2008, perhaps slowing down in 2009 and 2010 due to the global financial crisis. From the growth before the pandemic, we can expect these countries to continue to see more tourism in the post-pandemic world.
 
-# 2. Tourism's Economic Impact
+## Tourism's Economic Impact
 
 ```{r}
 GDP_df <- read_excel("data_raw/imf-dm-export-20231214.xls") 
@@ -161,7 +160,7 @@ long_data_GDP <- pivot_longer(GDP_df, cols = -Country, names_to = "Year", values
 long_data_GDP$Year <- as.Date(long_data_GDP$Year, format='%Y')
 ```
 
-## Ridgeline Plot of GDP for Countries with Top 10 Arrivals
+### Ridgeline Plot of GDP for Countries with Top 10 Arrivals
 
 ```{r}
 library(ggridges)
@@ -190,7 +189,7 @@ GDP_ten$GDP <- as.numeric(GDP_ten$GDP)
 ggplot(GDP_ten, aes(x = GDP/1000, y = Country, fill = Country)) +
   geom_density_ridges(scale = 1.5, alpha = 0.6) +
   theme_ridges() +
-  labs(title = "GDP for Top 10 Visited Countries", x = "GDP in Thousands", y = "Country") +
+  labs(title = "GDP for Top 10 Visited Countries (Minus China)", x = "GDP in Thousands", y = "Country") +
   scale_fill_brewer(palette = "Set3")
 ```
 
@@ -198,7 +197,7 @@ The ridgeline plot above shows us the distribution of GDP for the top ten most v
 
 When we remove China from the plots, we see that Canada and Italy now have the most spread GDP distribution. Saudi Arabia, Spain, and Turkey have fairly spread distributions as well. Each of these countries have a bimodal distribution. This indicates that these countries have had a lot of fluctuation in GDP since 2000. Hungary, Greece, Denmark, and Croatia have more stark modes, but lower median GDPs than the other countries.
 
-## Travel Contribution to GDP from 2018-2021
+### Travel Contribution to GDP from 2018-2021
 
 ```{r fig.height = 17, fig.width= 12}
 #| warning: false
@@ -225,12 +224,13 @@ ggplot(tourism_gdp_filtered, aes(x = Total, y = fct_reorder(GeoAreaName, Total))
 
 Now, we will look at how much of a country's GDP comes from tourism. For this metric, we only have data up to 2021, but we have seen in previous plots that tourism does not follow usual patterns after the pandemic, so we can safely study trends up to 2020, and assume they were typical for the pre-pandemic world. We can see that China's region of Macao receives by far the highest percentage of GDP from tourism compared to any other country between 2018 and 2020. Most other countries gaining a large percentage of their GDP from tourism are smaller island nations, such as Guam, Fiji, Jamaica, etc... However, we do see some of the top ten receiving a noteworthy amount of GDP from tourism, namely Croatia, Spain, Greece, Hungary, and Italy. From this, we can conclude that many of the most visited countries do benefit economically from their tourism industries, but many smaller countries that may not be the most visited gain more positive impact on their economies from the tourism they receive.
 
-## Heatmap of Inbound Tourism Expenditure from 2018-2022
+### Heatmap of Inbound Tourism Expenditure from 2018-2022
 
 ```{r fig.height = 7, fig.width= 10}
-library(magrittr)
-library(tidyverse)
-library(RColorBrewer)
+suppressWarnings({
+suppressMessages(library(magrittr))
+suppressMessages(library(tidyverse))
+suppressMessages(library(RColorBrewer))
 
 expenditures_raw <-read.csv("data_raw/Inbound_Expenditure.csv")
 
@@ -306,16 +306,16 @@ ggplot(expenditures_top20, aes(x = as.factor(Year), y = Country, fill = Expendit
        y = "Country",
        fill = "Expenditure")
 
-
+})
 ```
 
-We have seen how tourism effects GDP, now, conversely, we want to see how much certain countries spend on tourism. We will study the top twenty countries in terms of tourism expenditure. In the first heatmap, we can see that the spend on tourism in the United States dwarfs that of almost every country. It is possible that the United States is not noted as one of the most visited countries because, being such a large nation, there is a large amount of tourism within the country, which would not contribute to arrivals. Many other countries see more international arrivals due to their size.
+We have seen how tourism effects GDP, now, conversely, we want to see how much certain countries spend on tourism. We will study the top twenty countries in terms of tourism expenditure. In the first heatmap, we can see that the spend on tourism in the United States dwarfs that of almost every country. It is possible that the United States is not noted as one of the most visited countries because, being such a large nation, there is a large amount of tourism within the country, which would not contribute to arrivals. Many other countries see more international arrivals due to their size. due to their size.
 
-Despite that, the United States still spends the most money on inbound tourism. We can also see in the heatmap that there was a large decline in tourism expenditure in 2020 and 2021 due to Covid-19. France and Thailand had somewhat significant spending in 2018 and 2019, with only Frnace returning to tourism spending in 2022.
+Despite that, the United States still spends the most money on inbound tourism. We can also see in the heatmap that there was a large decline in tourism expenditure in 2020 and 2021 due to Covid-19. France and Thailand had somewhat significant spending in 2018 and 2019, with only France returning to tourism spending in 2022.
 
 When we remove the United States from the heatmap, it is easier to see which countries are spending the most on inbound tourism. France spends the most of the remaining countries, with Turkey and Italy investing a great deal in 2022. These two countries have certainly seen the payoff, being two of the top ten visited countries in 2022. Perhaps related to the trend in inbound arrivals, Macao spent a lot more money on tourism in 2018 and 2019 compared to post-pandemic years. An increase in spending since the pandemic has payed off for many countries, as Turkey, Saudi Arabia, Italy, and Greece are in the top twenty on spending and the top ten most visited. Tourism has direct economic impacts, and investing in tourists will benefit a country's economy as well.
 
-# 3. Tourism and Climate
+## Tourism and Climate
 
 ```{r}
 climate_df <- read.csv("data_raw/Climate-related_Disasters_Frequency.csv")
@@ -326,9 +326,10 @@ long_data_climate <- pivot_longer(climate_df, cols = c(-Country, -Indicator), na
 long_data_climate$Year <- as.Date(long_data_climate$Year, format='%Y')
 ```
 
-## Climate Disaster Frequencies for World Regions from 2018-2022
+### Climate Disaster Frequencies for World Regions from 2018-2022
 
 ```{r fig.height = 7, fig.width= 10}
+suppressWarnings({
 library(vcd)
 library(stringr)
 
@@ -371,7 +372,7 @@ world_regions <- world_regions %>%
   dplyr::select(Code, World.Region.according.to.the.World.Bank) 
 
 ##Join operation
-climate_joined <- left_join(climate_raw, world_regions)
+suppressMessages(climate_joined <- left_join(climate_raw, world_regions))
 
 #Pivoting the years and Disaster Count
 climate_pivot <- pivot_longer(climate_joined, cols = "2018":"2022",
@@ -394,13 +395,14 @@ ggplot(climate_category_subset, aes(x = World.Region.according.to.the.World.Bank
   labs(title = "Climate Disasters by World Region from 2018 to 2022", x = "World Region", y = "Number of Disasters", fill = "Disaster Type") +
   theme(axis.text.x = element_text(angle=90, vjust = 0.5, hjust = 1)) +
   scale_fill_manual(values = color_palette)
+})
 ```
 
 As we stated with Turkey's earthquake in 2017, climate disasters can have a large impact on tourism. The plots above show the number and types of climate disasters in different regions from 2018-2022. In each of these years, East Asia and Pacific is the region with the most climate disasters, typically followed by Sub-Saharan Africa and Latin America and Caribbean. As we have seen, the majority of the most visited countries are in Europe and Central Asia, one of the regions with less climate disasters, as well as Saudi Arabia in the middle east, where there are certainly the least climate disasters. Further, in 2018 and 2019 when China dominated the top visited country, there were more cases of extreme temperature in Europe, which have settled since 2020.
 
 Additionally, we can confidently assume that the pandemic was the main cause of a decrease in tourism since 2020, but we should also note the increase in climate disasters across the world since 2020 as well. East Asia and Pacific went from 75 climate disasters to over 100 between 2018 and 2020. Latin America and Caribbean jumped from \~42 in 2018 to 75 in 2021. Unfortunately, it is possible that tourism is a cause for these climate disasters.
 
-## Top 20 Countries with the most Climate Disasters
+### Top 20 Countries with the most Climate Disasters
 
 ```{r}
 # Group by country and calculate the total number of disasters
@@ -421,7 +423,7 @@ Looking on a more granular level, we can see the countries that have had the mos
 
 Other than Italy and China, we do not see any other top visited countries in the list of most climate disasters, indicating that tourists flock to countries that do not pose climate risks, especially those that may impact travel, such as storms or floods.
 
-## Climate Disasters from 2022 for Countries with most Arrivals
+### Climate Disasters from 2022 for Countries with most Arrivals
 
 ```{r}
 #Identify top 10 countries
@@ -436,7 +438,7 @@ country_codes <- expenditures_raw %>%
   dplyr::select(Country, Country.Code)
  
 # Join operation
-climate_arrivals_joined <- left_join(climate_countries_arrivals, country_codes)
+suppressMessages(climate_arrivals_joined <- left_join(climate_countries_arrivals, country_codes))
 
 # Find top 10 countries in Subset Dataframe 
 top_arrivals <- climate_arrivals_joined$Country.Code
@@ -469,11 +471,12 @@ ggplot(disasters_top10_2022, aes(x = reorder(Country, -Count), y = Count, fill =
   labs(title = "Climate Disasters for Top Arrival Countries in 2022", x = "Country", y = "Number of Disasters", fill = "Disaster Type") +
   theme(axis.text.x = element_text(angle=90, vjust = 0.5, hjust = 1)) +
   scale_fill_manual(values = color_palette)
+
 ```
 
 Looking specifically at the top visited countries, we can see that the country with the most climate disasters in 2022 was China with seven disasters, followed by Canada with six. These are the two largest countries by area of our top ten, so it makes sense that they would have the most climate disasters by their sheer size. Every other country had three or less climate disasters in 2022. The most common disasters in the top visited countries were storms and floods. Two countries, Hungary and Saudi Arabia, did not report any climate disasters in 2022. Further, three of the top visited countries only had one climate disaster in 2022. Clearly, the countries that most tourists visit are not risky countries when it comes to climate change.
 
-# 4. Tourism and Happiness
+## Tourism and Happiness
 
 ```{r}
 happiness_df <- read_excel("data_raw/DataForFigure2.1WHR2023.xls")
@@ -481,7 +484,7 @@ happiness_df <- read_excel("data_raw/DataForFigure2.1WHR2023.xls")
 happiness_df<-as.data.frame(happiness_df)
 ```
 
-## Happiness Indicators in Top 10 Visited Countries
+### Happiness Indicators in Top 10 Visited Countries
 
 ```{r}
 GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+

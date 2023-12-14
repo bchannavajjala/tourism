@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -57,8 +91,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -77,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./results.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Results</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -91,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Tourism</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/bchannavajjala/tourism" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/bchannavajjala/tourism" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -138,7 +171,33 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inbound-arrivals" id="toc-inbound-arrivals" class="nav-link active" data-scroll-target="#inbound-arrivals"><span class="header-section-number">3.1</span> Inbound Arrivals</a>
+  <ul class="collapse">
+  <li><a href="#top-10-countries-by-total-arrivals-in-2022" id="toc-top-10-countries-by-total-arrivals-in-2022" class="nav-link" data-scroll-target="#top-10-countries-by-total-arrivals-in-2022"><span class="header-section-number">3.1.1</span> Top 10 Countries by Total Arrivals in 2022</a></li>
+  <li><a href="#visits-from-2000-for-4-most-popular-countries" id="toc-visits-from-2000-for-4-most-popular-countries" class="nav-link" data-scroll-target="#visits-from-2000-for-4-most-popular-countries"><span class="header-section-number">3.1.2</span> Visits from 2000 for 4 most popular countries</a></li>
+  </ul></li>
+  <li><a href="#tourisms-economic-impact" id="toc-tourisms-economic-impact" class="nav-link" data-scroll-target="#tourisms-economic-impact"><span class="header-section-number">3.2</span> Tourism’s Economic Impact</a>
+  <ul class="collapse">
+  <li><a href="#ridgeline-plot-of-gdp-for-countries-with-top-10-arrivals" id="toc-ridgeline-plot-of-gdp-for-countries-with-top-10-arrivals" class="nav-link" data-scroll-target="#ridgeline-plot-of-gdp-for-countries-with-top-10-arrivals"><span class="header-section-number">3.2.1</span> Ridgeline Plot of GDP for Countries with Top 10 Arrivals</a></li>
+  <li><a href="#travel-contribution-to-gdp-from-2018-2021" id="toc-travel-contribution-to-gdp-from-2018-2021" class="nav-link" data-scroll-target="#travel-contribution-to-gdp-from-2018-2021"><span class="header-section-number">3.2.2</span> Travel Contribution to GDP from 2018-2021</a></li>
+  <li><a href="#heatmap-of-inbound-tourism-expenditure-from-2018-2022" id="toc-heatmap-of-inbound-tourism-expenditure-from-2018-2022" class="nav-link" data-scroll-target="#heatmap-of-inbound-tourism-expenditure-from-2018-2022"><span class="header-section-number">3.2.3</span> Heatmap of Inbound Tourism Expenditure from 2018-2022</a></li>
+  </ul></li>
+  <li><a href="#tourism-and-climate" id="toc-tourism-and-climate" class="nav-link" data-scroll-target="#tourism-and-climate"><span class="header-section-number">3.3</span> Tourism and Climate</a>
+  <ul class="collapse">
+  <li><a href="#climate-disaster-frequencies-for-world-regions-from-2018-2022" id="toc-climate-disaster-frequencies-for-world-regions-from-2018-2022" class="nav-link" data-scroll-target="#climate-disaster-frequencies-for-world-regions-from-2018-2022"><span class="header-section-number">3.3.1</span> Climate Disaster Frequencies for World Regions from 2018-2022</a></li>
+  <li><a href="#top-20-countries-with-the-most-climate-disasters" id="toc-top-20-countries-with-the-most-climate-disasters" class="nav-link" data-scroll-target="#top-20-countries-with-the-most-climate-disasters"><span class="header-section-number">3.3.2</span> Top 20 Countries with the most Climate Disasters</a></li>
+  <li><a href="#climate-disasters-from-2022-for-countries-with-most-arrivals" id="toc-climate-disasters-from-2022-for-countries-with-most-arrivals" class="nav-link" data-scroll-target="#climate-disasters-from-2022-for-countries-with-most-arrivals"><span class="header-section-number">3.3.3</span> Climate Disasters from 2022 for Countries with most Arrivals</a></li>
+  </ul></li>
+  <li><a href="#tourism-and-happiness" id="toc-tourism-and-happiness" class="nav-link" data-scroll-target="#tourism-and-happiness"><span class="header-section-number">3.4</span> Tourism and Happiness</a>
+  <ul class="collapse">
+  <li><a href="#happiness-indicators-in-top-10-visited-countries" id="toc-happiness-indicators-in-top-10-visited-countries" class="nav-link" data-scroll-target="#happiness-indicators-in-top-10-visited-countries"><span class="header-section-number">3.4.1</span> Happiness Indicators in Top 10 Visited Countries</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/bchannavajjala/tourism/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/bchannavajjala/tourism/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -160,8 +219,598 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read data from excel</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#http://www.sthda.com/english/wiki/reading-data-from-excel-files-xls-xlsx-into-r</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("readxl")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(readxl))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyr))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(sheet_names <span class="ot">&lt;-</span> <span class="fu">excel_sheets</span>(<span class="st">"data_raw/unwto-all-data-download_102023.xlsx"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#create a data frame for each sheet and store them in all_dfs</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(all_dfs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sheet_names, <span class="cf">function</span>(sheet) {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(<span class="st">"data_raw/unwto-all-data-download_102023.xlsx"</span>, <span class="at">sheet =</span> sheet)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#access the desired dataframe from all_dfs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(all_dfs[<span class="dv">2</span>])</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning up the data set to remove unnecessary rows and columns, and rename/change type of columns</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>cols_to_del <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[,cols_to_del]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">&lt;-</span> inbound_arrivals[<span class="dv">2</span>, ]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[<span class="sc">-</span><span class="dv">2</span>, ]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inbound_arrivals) <span class="ot">&lt;-</span> col_names</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inbound_arrivals)[<span class="fu">names</span>(inbound_arrivals)<span class="sc">==</span><span class="st">"Basic data and indicators"</span>] <span class="ot">&lt;-</span> <span class="st">"Country"</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inbound_arrivals)[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">37</span>]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span> <span class="fu">ifelse</span>(. <span class="sc">==</span> <span class="st">".."</span>, <span class="cn">NA</span>, .))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>columns_indices_to_convert <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(columns_indices_to_convert, as.numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace empty rows for country with the last non-empty value until a new value appears</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(<span class="st">"Country"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Merging arrival types into one column</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>columns_to_merge <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>,<span class="st">"5"</span>) </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Merged_Column =</span> <span class="fu">coalesce</span>(<span class="sc">!!!</span><span class="fu">syms</span>(columns_to_merge)))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>column_names <span class="ot">&lt;-</span> <span class="fu">names</span>(inbound_arrivals)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#moving the merged column to the front of the dataframe</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>last_column <span class="ot">&lt;-</span> column_names[<span class="fu">length</span>(column_names)]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[, <span class="sc">!</span><span class="fu">names</span>(inbound_arrivals) <span class="sc">%in%</span> columns_to_merge]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>column_to_move <span class="ot">&lt;-</span> <span class="st">"Merged_Column"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>new_position <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>{{column_to_move}}) <span class="sc">%&gt;%</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>({{column_to_move}} <span class="sc">:</span><span class="er">=</span> inbound_arrivals[[column_to_move]]) <span class="sc">%&gt;%</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>({{column_to_move}}, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>total_arrivals <span class="ot">&lt;-</span> <span class="fu">subset</span>(inbound_arrivals, Merged_Column <span class="sc">==</span> <span class="st">'Total arrivals'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>total_arrivals_2022 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(total_arrivals[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">29</span>,<span class="dv">30</span>,<span class="dv">31</span>,<span class="dv">32</span>,<span class="dv">33</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="inbound-arrivals" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="inbound-arrivals"><span class="header-section-number">3.1</span> Inbound Arrivals</h2>
+<section id="top-10-countries-by-total-arrivals-in-2022" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="top-10-countries-by-total-arrivals-in-2022"><span class="header-section-number">3.1.1</span> Top 10 Countries by Total Arrivals in 2022</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>top_countries <span class="ot">&lt;-</span> total_arrivals_2022 <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country, <span class="st">`</span><span class="at">2018</span><span class="st">`</span>, <span class="st">`</span><span class="at">2019</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2021</span><span class="st">`</span>, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Country, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Arrivals"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">dense_rank</span>(<span class="fu">desc</span>(Arrivals))) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Year, <span class="fu">desc</span>(Arrivals))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>top_countries <span class="ot">&lt;-</span> top_countries <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Year, Arrivals) <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Country =</span> <span class="fu">factor</span>(Country, <span class="fu">unique</span>(Country))) </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting faceted diverging bar chart</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_countries, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(Country, Arrivals), <span class="at">y =</span> (Arrivals)<span class="sc">*</span><span class="dv">1000</span>, <span class="at">fill =</span> (Arrivals)<span class="sc">/</span><span class="dv">1000</span>)) <span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(.<span class="sc">~</span> Year, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Top 10 Visited Countries by Year"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Country"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Arrivals"</span>,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Arrivals in Millions"</span>) <span class="sc">+</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">format</span>(x, <span class="at">scientific =</span> <span class="cn">FALSE</span>))<span class="sc">+</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In the plots above, we see the top 10 most visited countries by total arrivals for the years 2018-2022. We study these years so that we can see the impact of the pandemic, looking two years before and two years after. Over these five years, the countries in the top ten do not shift very much. The main shift comes from China, where after 2020, visits drop significantly. Macao and Hong Kong drop off of the list entirely by 2022. China was the most visited country in 2018 and 2019, but is overtaken by Italy in 2020 and then Spain in 2021 and 2022. It is not difficult to see the impact of the corona virus pandemic in this data. Not only with countries visited, but also in the number of travelers. The most visited countries decreased by up to four times between 2019 and 2020. Some recovery in travel began in 2021, but was not notable until 2022, especially in Spain.</p>
+</section>
+<section id="visits-from-2000-for-4-most-popular-countries" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="visits-from-2000-for-4-most-popular-countries"><span class="header-section-number">3.1.2</span> Visits from 2000 for 4 most popular countries</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>inbound_arrivals<span class="sc">$</span><span class="st">`</span><span class="at">1995</span><span class="st">`</span><span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(inbound_arrivals<span class="sc">$</span><span class="st">`</span><span class="at">1995</span><span class="st">`</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(inbound_arrivals, <span class="at">cols =</span> <span class="fu">c</span>(<span class="sc">-</span>Merged_Column,<span class="sc">-</span>Country, <span class="sc">-</span>Units, <span class="sc">-</span>Notes, <span class="sc">-</span>Series), <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Arrivals"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>long_data<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(long_data<span class="sc">$</span>Year, <span class="at">format=</span><span class="st">'%Y'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>top_four <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SPAIN"</span>,<span class="st">"ITALY"</span>,<span class="st">"TÜRKIYE"</span>,<span class="st">"CROATIA"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>long_data_four <span class="ot">&lt;-</span> <span class="fu">subset</span>(long_data, Country <span class="sc">%in%</span> top_four)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>long_data_four <span class="ot">&lt;-</span> <span class="fu">subset</span>(long_data_four, Merged_Column <span class="sc">==</span> <span class="st">"Total arrivals"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>long_data_four <span class="ot">&lt;-</span> <span class="fu">subset</span>(long_data_four, Year <span class="sc">&gt;=</span> <span class="st">'2000-12-01'</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_data_four, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> (Arrivals)<span class="sc">/</span><span class="dv">1000</span>, <span class="at">group =</span> Country, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Country, <span class="at">scales =</span> <span class="st">"free_y"</span>)<span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">format</span>(x, <span class="at">scientific =</span> <span class="cn">FALSE</span>))<span class="sc">+</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Visits since 2000 in most popular countries"</span>, <span class="at">y=</span><span class="st">"Arrivals in Millions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Looking at the top four most visited countries in 2022, we see similar trends in travel from 2000 to 2022. All four countries have seen a great increase in arrivals since 2000. However, Spain and Italy both already had over 60 million arrivals per year starting in 2000, and have only grown since. Croatia was already seeing almost 40 million arrivals per year in 2000, peaking at 60 million in 2019. Turkey has seen the most growth, starting at 10 million arrivals per year in 2000, and peaking over 50 million in both 2019 and 2022. In fact, Turkey is the only country that has returned to its pre-pandemic level of arrivals. All four countries saw a drastic decrease in arrivals in 2020, with 2020 numbers being the lowest recorded since 2000 for Croatia, Italy, and Spain. Turkey has had more fluctuation in travel numbers since 2017, possibly due to earthquakes as well as Covid. Croatia and Spain had small peaks in 2008, perhaps slowing down in 2009 and 2010 due to the global financial crisis. From the growth before the pandemic, we can expect these countries to continue to see more tourism in the post-pandemic world.</p>
+</section>
+</section>
+<section id="tourisms-economic-impact" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="tourisms-economic-impact"><span class="header-section-number">3.2</span> Tourism’s Economic Impact</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>GDP_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_raw/imf-dm-export-20231214.xls"</span>) </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>GDP_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(GDP_df[<span class="sc">-</span><span class="dv">1</span>,])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(GDP_df)[<span class="fu">names</span>(GDP_df)<span class="sc">==</span><span class="st">"GDP, current prices (Billions of U.S. dollars)"</span>] <span class="ot">&lt;-</span> <span class="st">"Country"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>GDP_df <span class="ot">&lt;-</span> GDP_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span> <span class="fu">ifelse</span>(. <span class="sc">==</span> <span class="st">"no data"</span>, <span class="cn">NA</span>, .))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>long_data_GDP <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(GDP_df, <span class="at">cols =</span> <span class="sc">-</span>Country, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"GDP"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>long_data_GDP<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(long_data_GDP<span class="sc">$</span>Year, <span class="at">format=</span><span class="st">'%Y'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="ridgeline-plot-of-gdp-for-countries-with-top-10-arrivals" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="ridgeline-plot-of-gdp-for-countries-with-top-10-arrivals"><span class="header-section-number">3.2.1</span> Ridgeline Plot of GDP for Countries with Top 10 Arrivals</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>top_ten_arrivals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Spain"</span>,<span class="st">"Italy"</span>,<span class="st">"Türkiye, Republic of"</span>,<span class="st">"Croatia"</span>,<span class="st">"Hungary"</span>,<span class="st">"Denmark"</span>,<span class="st">"Greece"</span>,<span class="st">"China, People's Republic of"</span>,<span class="st">"Canada"</span>,<span class="st">"Saudi Arabia"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>GDP_ten <span class="ot">&lt;-</span> <span class="fu">subset</span>(long_data_GDP, Country <span class="sc">%in%</span> top_ten_arrivals)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>GDP_ten <span class="ot">&lt;-</span> <span class="fu">subset</span>(GDP_ten, Year <span class="sc">&gt;=</span> <span class="st">'2000-12-01'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>GDP_ten <span class="ot">&lt;-</span> <span class="fu">subset</span>(GDP_ten, Year <span class="sc">&lt;=</span> <span class="st">'2023-12-01'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>GDP_ten<span class="sc">$</span>GDP <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(GDP_ten<span class="sc">$</span>GDP)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_ten, <span class="fu">aes</span>(<span class="at">x =</span> GDP<span class="sc">/</span><span class="dv">1000</span>, <span class="at">y =</span> Country, <span class="at">fill =</span> Country)) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">scale =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GDP for Top 10 Visited Countries"</span>, <span class="at">x =</span> <span class="st">"GDP in Thousands"</span>, <span class="at">y =</span> <span class="st">"Country"</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Picking joint bandwidth of 0.335</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>top_ten_arrivals_no_China <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Spain"</span>,<span class="st">"Italy"</span>,<span class="st">"Türkiye, Republic of"</span>,<span class="st">"Croatia"</span>,<span class="st">"Hungary"</span>,<span class="st">"Denmark"</span>,<span class="st">"Greece"</span>,<span class="st">"Canada"</span>,<span class="st">"Saudi Arabia"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>GDP_ten <span class="ot">&lt;-</span> <span class="fu">subset</span>(long_data_GDP, Country <span class="sc">%in%</span> top_ten_arrivals_no_China)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>GDP_ten <span class="ot">&lt;-</span> <span class="fu">subset</span>(GDP_ten, Year <span class="sc">&gt;=</span> <span class="st">'2000-12-01'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>GDP_ten <span class="ot">&lt;-</span> <span class="fu">subset</span>(GDP_ten, Year <span class="sc">&lt;=</span> <span class="st">'2023-12-01'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>GDP_ten<span class="sc">$</span>GDP <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(GDP_ten<span class="sc">$</span>GDP)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(GDP_ten, <span class="fu">aes</span>(<span class="at">x =</span> GDP<span class="sc">/</span><span class="dv">1000</span>, <span class="at">y =</span> Country, <span class="at">fill =</span> Country)) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">scale =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GDP for Top 10 Visited Countries (Minus China)"</span>, <span class="at">x =</span> <span class="st">"GDP in Thousands"</span>, <span class="at">y =</span> <span class="st">"Country"</span>) <span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Picking joint bandwidth of 0.0766</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The ridgeline plot above shows us the distribution of GDP for the top ten most visited countries in 2022. The GDP data spans from 2000 to 2022. From this plot, we can see that China has the highest possible GDP, but has the most spread distribution. All other countries have a fairly similar distribution and median, with Italy and Canada having slightly higher medians than the other seven countries. However, with China’s unique distribution, it is difficult for us to assess the other countries’ GDP.</p>
+<p>When we remove China from the plots, we see that Canada and Italy now have the most spread GDP distribution. Saudi Arabia, Spain, and Turkey have fairly spread distributions as well. Each of these countries have a bimodal distribution. This indicates that these countries have had a lot of fluctuation in GDP since 2000. Hungary, Greece, Denmark, and Croatia have more stark modes, but lower median GDPs than the other countries.</p>
+</section>
+<section id="travel-contribution-to-gdp-from-2018-2021" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="travel-contribution-to-gdp-from-2018-2021"><span class="header-section-number">3.2.2</span> Travel Contribution to GDP from 2018-2021</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lock5withR)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>tourism_gdp_raw <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"data_raw/tourism_gdp_contribution.csv"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter data for years 2018-2021. Only countries that have data for those 4 years will be graphed.</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>tourism_gdp_filtered <span class="ot">&lt;-</span> tourism_gdp_raw <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GeoAreaName) <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TimePeriod <span class="sc">&gt;=</span> <span class="dv">2018</span> <span class="sc">&amp;</span> TimePeriod <span class="sc">&lt;=</span> <span class="dv">2021</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Building faceted Cleveland Dot Plot</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tourism_gdp_filtered, <span class="fu">aes</span>(<span class="at">x =</span> Total, <span class="at">y =</span> <span class="fu">fct_reorder</span>(GeoAreaName, Total))) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Avg. Tourism Contribution to GDP between 2008 and 2021"</span>) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>TimePeriod) <span class="sc">+</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Average Contribution of Tourism to GDP"</span>) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Country"</span>)<span class="sc">+</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1152"></p>
+</div>
+</div>
+<p>Now, we will look at how much of a country’s GDP comes from tourism. For this metric, we only have data up to 2021, but we have seen in previous plots that tourism does not follow usual patterns after the pandemic, so we can safely study trends up to 2020, and assume they were typical for the pre-pandemic world. We can see that China’s region of Macao receives by far the highest percentage of GDP from tourism compared to any other country between 2018 and 2020. Most other countries gaining a large percentage of their GDP from tourism are smaller island nations, such as Guam, Fiji, Jamaica, etc… However, we do see some of the top ten receiving a noteworthy amount of GDP from tourism, namely Croatia, Spain, Greece, Hungary, and Italy. From this, we can conclude that many of the most visited countries do benefit economically from their tourism industries, but many smaller countries that may not be the most visited gain more positive impact on their economies from the tourism they receive.</p>
+</section>
+<section id="heatmap-of-inbound-tourism-expenditure-from-2018-2022" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="heatmap-of-inbound-tourism-expenditure-from-2018-2022"><span class="header-section-number">3.2.3</span> Heatmap of Inbound Tourism Expenditure from 2018-2022</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>({</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(magrittr))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(RColorBrewer))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>expenditures_raw <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"data_raw/Inbound_Expenditure.csv"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove years before 2017</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>remove_columns <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X2012"</span>, <span class="st">"X2013"</span>, <span class="st">"X2014"</span>, <span class="st">"X2015"</span>, <span class="st">"X2016"</span>, <span class="st">"X2017"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>expenditures_raw <span class="ot">&lt;-</span> <span class="fu">select</span>(expenditures_raw, <span class="sc">-</span>remove_columns)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>expenditures_raw <span class="ot">&lt;-</span> <span class="fu">rename</span>(expenditures_raw,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Country"</span> <span class="ot">=</span> Basic.data.and.indicators,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2018"</span> <span class="ot">=</span> X2018,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2019"</span> <span class="ot">=</span> X2019,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2020"</span> <span class="ot">=</span> X2020,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2021"</span> <span class="ot">=</span> X2021,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2022"</span> <span class="ot">=</span> X2022)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span><span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>,expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span>))</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>,expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>))</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>,expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>))</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>,expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span>))</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>,expenditures_raw<span class="sc">$</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>))</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove rows with NAs between 2018-2022. We only want to consider countries for which we have complete expenditure data</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>expenditures_filtered <span class="ot">&lt;-</span> expenditures_raw <span class="sc">%&gt;%</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">2018</span><span class="st">`</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">2019</span><span class="st">`</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">2021</span><span class="st">`</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">2022</span><span class="st">`</span>))</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape data into long format for plotting</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>expenditures_pivot <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(expenditures_filtered, </span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2018</span><span class="st">`</span>, <span class="st">`</span><span class="at">2019</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2021</span><span class="st">`</span>, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>),</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">names_to =</span> <span class="st">"Year"</span>,</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">values_to =</span> <span class="st">"Expenditure"</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean expenditure for each country</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>mean_expenditure_all <span class="ot">&lt;-</span> expenditures_pivot <span class="sc">%&gt;%</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_expenditure =</span> <span class="fu">mean</span>(Expenditure)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_expenditure))</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the top 20 countries including the US</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>top_countries_us <span class="ot">&lt;-</span> <span class="fu">head</span>(mean_expenditure_all, <span class="dv">20</span>)<span class="sc">$</span>Country</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter data for the top 20 countries including the US</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>expenditures_top20_us <span class="ot">&lt;-</span> expenditures_pivot <span class="sc">%&gt;%</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> top_countries_us)</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="co">#Setting Color Scheme for US Heatmap</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>heatmap_colors_1 <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">name =</span> <span class="st">"YlGnBu"</span>)</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting Heatmap with United States</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(expenditures_top20_us, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(Year), <span class="at">y =</span> Country, <span class="at">fill =</span> Expenditure)) <span class="sc">+</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Inbound Tourism Expenditure from 2018-2022 for Top 20 Countries"</span>,</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Country"</span>,</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Expenditure"</span>)</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the top 20 countries excluding the US</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>top_countries <span class="ot">&lt;-</span>  mean_expenditure_all <span class="sc">%&gt;%</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">!=</span> <span class="st">"UNITED STATES OF AMERICA"</span>) </span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>top_countries <span class="ot">&lt;-</span> <span class="fu">head</span>(top_countries, <span class="dv">20</span>)<span class="sc">$</span>Country</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter data for the top 20 countries excluding the US</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>expenditures_top20 <span class="ot">&lt;-</span> expenditures_pivot <span class="sc">%&gt;%</span></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> top_countries)</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting Heatmap with United States</span></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(expenditures_top20, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(Year), <span class="at">y =</span> Country, <span class="at">fill =</span> Expenditure)) <span class="sc">+</span></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Inbound Tourism Expenditure from 2018-2022 for Top 20 Countries (excluding US)"</span>,</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Country"</span>,</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Expenditure"</span>)</span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>We have seen how tourism effects GDP, now, conversely, we want to see how much certain countries spend on tourism. We will study the top twenty countries in terms of tourism expenditure. In the first heatmap, we can see that the spend on tourism in the United States dwarfs that of almost every country. It is possible that the United States is not noted as one of the most visited countries because, being such a large nation, there is a large amount of tourism within the country, which would not contribute to arrivals. Many other countries see more international arrivals due to their size. due to their size.</p>
+<p>Despite that, the United States still spends the most money on inbound tourism. We can also see in the heatmap that there was a large decline in tourism expenditure in 2020 and 2021 due to Covid-19. France and Thailand had somewhat significant spending in 2018 and 2019, with only France returning to tourism spending in 2022.</p>
+<p>When we remove the United States from the heatmap, it is easier to see which countries are spending the most on inbound tourism. France spends the most of the remaining countries, with Turkey and Italy investing a great deal in 2022. These two countries have certainly seen the payoff, being two of the top ten visited countries in 2022. Perhaps related to the trend in inbound arrivals, Macao spent a lot more money on tourism in 2018 and 2019 compared to post-pandemic years. An increase in spending since the pandemic has payed off for many countries, as Turkey, Saudi Arabia, Italy, and Greece are in the top twenty on spending and the top ten most visited. Tourism has direct economic impacts, and investing in tourists will benefit a country’s economy as well.</p>
+</section>
+</section>
+<section id="tourism-and-climate" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="tourism-and-climate"><span class="header-section-number">3.3</span> Tourism and Climate</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>climate_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data_raw/Climate-related_Disasters_Frequency.csv"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>climate_df <span class="ot">&lt;-</span> climate_df[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">11</span><span class="sc">:</span><span class="dv">53</span>)]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(climate_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"F"</span>, <span class="st">""</span>, <span class="fu">names</span>(climate_df))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>long_data_climate <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(climate_df, <span class="at">cols =</span> <span class="fu">c</span>(<span class="sc">-</span>Country, <span class="sc">-</span>Indicator), <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Disasters"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>long_data_climate<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(long_data_climate<span class="sc">$</span>Year, <span class="at">format=</span><span class="st">'%Y'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="climate-disaster-frequencies-for-world-regions-from-2018-2022" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="climate-disaster-frequencies-for-world-regions-from-2018-2022"><span class="header-section-number">3.3.1</span> Climate Disaster Frequencies for World Regions from 2018-2022</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>({</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in climate dataset and regions dataset</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>climate_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data_raw/climate_new.csv"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>world_regions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data_raw/world_regions.csv"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Replace NAs with 0s</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>climate_raw[<span class="fu">is.na</span>(climate_raw)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Recode disaster names</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>climate_raw <span class="ot">&lt;-</span> climate_raw <span class="sc">%&gt;%</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">event_type =</span> <span class="fu">case_when</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(Indicator, <span class="st">"Drought"</span>) <span class="sc">~</span> <span class="st">"Drought"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(Indicator, <span class="st">"Extreme temperature"</span>) <span class="sc">~</span> <span class="st">"Extreme Temperature"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(Indicator, <span class="st">"Flood"</span>) <span class="sc">~</span> <span class="st">"Flood"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(Indicator, <span class="st">"Landslide"</span>) <span class="sc">~</span> <span class="st">"Landslide"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(Indicator, <span class="st">"Storm"</span>) <span class="sc">~</span> <span class="st">"Storm"</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(Indicator, <span class="st">"Wildfire"</span>) <span class="sc">~</span> <span class="st">"Wildfire"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(Indicator, <span class="st">"TOTAL"</span>) <span class="sc">~</span> <span class="st">"Total"</span>,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>  <span class="co"># Default case if none of the above conditions are met</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove years before 2018</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>columns_to_remove <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"F2000"</span>, <span class="st">"F2001"</span>, <span class="st">"F2002"</span>, <span class="st">"F2003"</span>, <span class="st">"F2004"</span>, <span class="st">"F2005"</span>, <span class="st">"F2006"</span>, <span class="st">"F2007"</span>, <span class="st">"F2008"</span>, <span class="st">"F2009"</span>, <span class="st">"F2010"</span>, <span class="st">"F2011"</span>, <span class="st">"F2012"</span>, <span class="st">"F2013"</span>, <span class="st">"F2014"</span>, <span class="st">"F2015"</span>, <span class="st">"F2016"</span>, <span class="st">"F2017"</span>)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>climate_raw <span class="ot">&lt;-</span> <span class="fu">select</span>(climate_raw, <span class="sc">-</span>columns_to_remove)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co">#Join datasets on Country Code</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Rename columns in climate data set</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>climate_raw <span class="ot">&lt;-</span> <span class="fu">rename</span>(climate_raw,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Code =</span> ISO3,</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2018"</span> <span class="ot">=</span> F2018,</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2019"</span> <span class="ot">=</span> F2019,</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2020"</span> <span class="ot">=</span> F2020,</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2021"</span> <span class="ot">=</span> F2021,</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"2022"</span> <span class="ot">=</span> F2022)</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="do">##Selecting columns from world_regions to join on</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>world_regions <span class="ot">&lt;-</span> world_regions <span class="sc">%&gt;%</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Code, World.Region.according.to.the.World.Bank) </span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="do">##Join operation</span></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(climate_joined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(climate_raw, world_regions))</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="co">#Pivoting the years and Disaster Count</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>climate_pivot <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(climate_joined, <span class="at">cols =</span> <span class="st">"2018"</span><span class="sc">:</span><span class="st">"2022"</span>,</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>                               <span class="at">names_to =</span> <span class="st">"Years"</span>,</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>                               <span class="at">values_to =</span> <span class="st">"Count"</span>)</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure 'event_type' is a factor to ensure proper stacking</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>climate_pivot<span class="sc">$</span>event_type <span class="ot">&lt;-</span> <span class="fu">factor</span>(climate_pivot<span class="sc">$</span>event_type)</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove Total Column for Stacked Bar Chart</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>climate_category_subset <span class="ot">&lt;-</span> <span class="fu">subset</span>(climate_pivot, event_type <span class="sc">!=</span> <span class="st">"Total"</span>)</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a><span class="co">#Import color package</span></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>color_palette <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">7</span>, <span class="at">name =</span> <span class="st">"Set2"</span>)</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a stacked bar chart with facets</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(climate_category_subset, <span class="fu">aes</span>(<span class="at">x =</span> World.Region.according.to.the.World.Bank, <span class="at">y =</span> Count, <span class="at">fill =</span> event_type)) <span class="sc">+</span></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Years, <span class="at">scales =</span> <span class="st">"fixed"</span>) <span class="sc">+</span>  <span class="co"># Facet by Year</span></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Climate Disasters by World Region from 2018 to 2022"</span>, <span class="at">x =</span> <span class="st">"World Region"</span>, <span class="at">y =</span> <span class="st">"Number of Disasters"</span>, <span class="at">fill =</span> <span class="st">"Disaster Type"</span>) <span class="sc">+</span></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> color_palette)</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: grid</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>As we stated with Turkey’s earthquake in 2017, climate disasters can have a large impact on tourism. The plots above show the number and types of climate disasters in different regions from 2018-2022. In each of these years, East Asia and Pacific is the region with the most climate disasters, typically followed by Sub-Saharan Africa and Latin America and Caribbean. As we have seen, the majority of the most visited countries are in Europe and Central Asia, one of the regions with less climate disasters, as well as Saudi Arabia in the middle east, where there are certainly the least climate disasters. Further, in 2018 and 2019 when China dominated the top visited country, there were more cases of extreme temperature in Europe, which have settled since 2020.</p>
+<p>Additionally, we can confidently assume that the pandemic was the main cause of a decrease in tourism since 2020, but we should also note the increase in climate disasters across the world since 2020 as well. East Asia and Pacific went from 75 climate disasters to over 100 between 2018 and 2020. Latin America and Caribbean jumped from ~42 in 2018 to 75 in 2021. Unfortunately, it is possible that tourism is a cause for these climate disasters.</p>
+</section>
+<section id="top-20-countries-with-the-most-climate-disasters" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="top-20-countries-with-the-most-climate-disasters"><span class="header-section-number">3.3.2</span> Top 20 Countries with the most Climate Disasters</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by country and calculate the total number of disasters</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>climate_countries_total <span class="ot">&lt;-</span> climate_category_subset <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Country, <span class="at">wt =</span> Count) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">20</span>, n)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>climate_countries_total <span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Country, <span class="sc">-</span>n),<span class="at">y=</span>n)) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,<span class="at">fill =</span> <span class="st">"cornflowerblue"</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Top 20 Countries with most Climate Disasters from 2018-2022"</span>) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Countries"</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Climate Disaster Count"</span>) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">45</span>, <span class="at">vjust =</span> <span class="fl">0.95</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Looking on a more granular level, we can see the countries that have had the most climate disasters since 2018. The United States dominates again, with over 125 disasters in the past five years. We note that there are only two countries in the top ten most visited that are included in the top twenty for climate disasters: China and Italy. Like the United States, China is an enormous, geographically diverse country, so having many climate disasters in these years is not surprising. Italy, however, is much smaller, but we know that Italy is facing many issues with flooding, often tied to tourism, especially in Venice. (<a href="https://www.cnn.com/2019/11/14/europe/venice-floods-problems-intl/index.html" class="uri">https://www.cnn.com/2019/11/14/europe/venice-floods-problems-intl/index.html</a>)</p>
+<p>Other than Italy and China, we do not see any other top visited countries in the list of most climate disasters, indicating that tourists flock to countries that do not pose climate risks, especially those that may impact travel, such as storms or floods.</p>
+</section>
+<section id="climate-disasters-from-2022-for-countries-with-most-arrivals" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="climate-disasters-from-2022-for-countries-with-most-arrivals"><span class="header-section-number">3.3.3</span> Climate Disasters from 2022 for Countries with most Arrivals</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Identify top 10 countries</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>top_ten_arrivals_caps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SPAIN"</span>,<span class="st">"ITALY"</span>,<span class="st">"TÜRKIYE"</span>,<span class="st">"CROATIA"</span>,<span class="st">"HUNGARY"</span>,<span class="st">"DENMARK"</span>,<span class="st">"GREECE"</span>,<span class="st">"CHINA"</span>,<span class="st">"CANADA"</span>,<span class="st">"SAUDI ARABIA"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>top_ten_countries <span class="ot">&lt;-</span> <span class="fu">subset</span>(total_arrivals_2022, Country <span class="sc">%in%</span> top_ten_arrivals_caps)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>top_ten_countries <span class="ot">&lt;-</span> top_ten_countries[, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">7</span>)]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>climate_countries_arrivals <span class="ot">&lt;-</span> <span class="fu">tail</span>(top_ten_countries, <span class="dv">10</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting columns from world_regions to join on</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>country_codes <span class="ot">&lt;-</span> expenditures_raw <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Country, Country.Code)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Join operation</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(climate_arrivals_joined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(climate_countries_arrivals, country_codes))</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Find top 10 countries in Subset Dataframe </span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>top_arrivals <span class="ot">&lt;-</span> climate_arrivals_joined<span class="sc">$</span>Country.Code</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>disasters_top10 <span class="ot">&lt;-</span> climate_category_subset <span class="sc">%&gt;%</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Code <span class="sc">%in%</span> top_arrivals)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtering to only 2022 disasters</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>disasters_top10_2022 <span class="ot">&lt;-</span> disasters_top10 <span class="sc">%&gt;%</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Years <span class="sc">==</span> <span class="dv">2022</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate total for the top 10 Countries for 2022 only</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by country and calculate the total number of disasters</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>disasters_2022_total <span class="ot">&lt;-</span> disasters_top10_2022 <span class="sc">%&gt;%</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Country, <span class="at">wt =</span> Count) <span class="sc">%&gt;%</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, n)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot top 10 countries</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>disasters_2022_total <span class="sc">%&gt;%</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Country, <span class="sc">-</span>n),<span class="at">y=</span>n)) <span class="sc">+</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>,<span class="at">fill =</span> <span class="st">"cornflowerblue"</span>) <span class="sc">+</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"2022 Climate Disasters for Top Arrival Countries"</span>) <span class="sc">+</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Countries"</span>) <span class="sc">+</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Climate Disaster Count"</span>) <span class="sc">+</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.95</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacked Bar Chart to break down disaster type</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(disasters_top10_2022, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Country, <span class="sc">-</span>Count), <span class="at">y =</span> Count, <span class="at">fill =</span> event_type)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Climate Disasters for Top Arrival Countries in 2022"</span>, <span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Number of Disasters"</span>, <span class="at">fill =</span> <span class="st">"Disaster Type"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> color_palette)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Looking specifically at the top visited countries, we can see that the country with the most climate disasters in 2022 was China with seven disasters, followed by Canada with six. These are the two largest countries by area of our top ten, so it makes sense that they would have the most climate disasters by their sheer size. Every other country had three or less climate disasters in 2022. The most common disasters in the top visited countries were storms and floods. Two countries, Hungary and Saudi Arabia, did not report any climate disasters in 2022. Further, three of the top visited countries only had one climate disaster in 2022. Clearly, the countries that most tourists visit are not risky countries when it comes to climate change.</p>
+</section>
+</section>
+<section id="tourism-and-happiness" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="tourism-and-happiness"><span class="header-section-number">3.4</span> Tourism and Happiness</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>happiness_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_raw/DataForFigure2.1WHR2023.xls"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>happiness_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(happiness_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="happiness-indicators-in-top-10-visited-countries" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="happiness-indicators-in-top-10-visited-countries"><span class="header-section-number">3.4.1</span> Happiness Indicators in Top 10 Visited Countries</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>GGally<span class="sc">::</span><span class="fu">ggparcoord</span>(<span class="at">data=</span>happiness_df,<span class="at">columns =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">scale=</span><span class="st">"std"</span>, <span class="at">alphaLines =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Happiness indicators in all countries"</span>, <span class="at">x =</span> <span class="st">"Indicators"</span>, <span class="at">y =</span> <span class="st">"Value"</span>)<span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'GGally':
+  method from   
+  +.gg   ggplot2</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The parallel coordinates plot above shows trends in the global happiness study. From all countries studied, we can see that GDP per capita, social support, and healthy life expectancy seem to be linearly related. Economic freedom and support for citizens unsurprisingly lead to a higher life expectancy. Interestingly, there is a negative trend between freedom to make life choices and generosity, meaning countries with higher perceived freedom to make choices report lower scores for generosity, and vice versa. Similarly, there is another negative trend between generosity and perceptions of corruption. Lower generosity generally coincides with higher perceptions of corruption and vice versa. It is important to note that this data comes from polls and is averaged from every poll taken in the country, but it is still interesting to study how different indicators for happiness are generally related. Now we will see how this relates to tourism.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>top_ten_arrivals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Spain"</span>,<span class="st">"Italy"</span>,<span class="st">"Turkey"</span>,<span class="st">"Croatia"</span>,<span class="st">"Hungary"</span>,<span class="st">"Denmark"</span>,<span class="st">"Greece"</span>,<span class="st">"China"</span>,<span class="st">"Canada"</span>,<span class="st">"Saudi Arabia"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>happiness_df <span class="ot">&lt;-</span> happiness_df <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Country_name =</span> <span class="st">`</span><span class="at">Country name</span><span class="st">`</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>happy_ten <span class="ot">&lt;-</span> <span class="fu">subset</span>(happiness_df, Country_name <span class="sc">%in%</span> top_ten_arrivals)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(redav)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>happiness_data <span class="ot">&lt;-</span> happy_ten[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>)]</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>happiness_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(happiness_data)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">draw_biplot</span>(happiness_data)<span class="sc">+</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Happiness Indicators in Most Visited Countries"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In the PCA chart above, we see how the chosen happiness indicators and related, and which indicators are most important in the top 10 most visited countries. We can see that Denmark and Canada have similar levels for each happiness indicator, with the highest values for generosity, social support, and logged GDP per capita. Greece has the lowest rating for generosity and logged GDP per capita, and the highest for perceptions of corruption. It is very interesting to note that when looking at logged GDP per capita, China is number nine out of ten, compared to having the top GDP in the ridgeline plot above. China also has very little social support and the second lowest health life expectancy, only better than Saudi Arabia. Spain falls somewhat central to most indicators, which is surprising as the most visited country in 2022. Perhaps the lack of extremes attracts visitors.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -417,7 +1066,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/bchannavajjala/tourism/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/bchannavajjala/tourism/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>
