@@ -77,26 +77,37 @@ inbound_arrivals <- inbound_arrivals %>%
 
 ```{r}
 total_arrivals <- subset(inbound_arrivals, Merged_Column == 'Total arrivals')
-total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,33)])
+total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,29,30,31,32,33)])
 ```
 
 ```{r}
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(forcats)
 
-top_bottom_countries <- total_arrivals_2022 %>%
-  filter(Merged_Column == "Total arrivals") %>%
-  arrange(abs(`2022`)) %>%
-  filter(row_number() <= 10 | row_number() > n() - 10)
+top_countries <- total_arrivals_2022 %>%
+  select(Country, `2018`, `2019`, `2020`, `2021`, `2022`) %>%
+  pivot_longer(cols = -Country, names_to = "Year", values_to = "Arrivals") %>%
+  group_by(Year) %>%
+  mutate(rank = dense_rank(desc(Arrivals))) %>%
+  filter(rank <= 10) %>%
+  arrange(Year, desc(Arrivals))
 
-ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = `2022`, fill = `2022` > 0)) +
-  geom_bar(stat = "identity", position = "identity", color = "black") +
-  scale_fill_manual(values = c("negative" = "red", "positive" = "blue"),
-                    labels = c("Negative", "Positive")) +
-  labs(title = "Top and Bottom 10 Countries by Total Arrivals in 2022",
-       x = "Country", y = "Total Arrivals") +
-  theme_minimal() +
-  coord_flip()
+top_countries <- top_countries %>%
+  arrange(Year, Arrivals) %>%
+  mutate(Country = factor(Country, unique(Country))) 
+
+# Plotting faceted diverging bar chart
+ggplot(top_countries, aes(x = fct_reorder(Country, Arrivals), y = (Arrivals)*1000, fill = Arrivals)) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(.~ Year, scales = "free") +
+  labs(title = "Top 10 Visited Countries by Year",
+       x = "Country",
+       y = "Arrivals") +
+  theme_minimal()+
+  theme(axis.text.x = element_blank())
 ```
 
 ```{r}
@@ -110,6 +121,7 @@ top_four <- c("SPAIN","ITALY","TÜRKIYE","CROATIA")
 
 long_data_four <- subset(long_data, Country %in% top_four)
 long_data_four <- subset(long_data_four, Merged_Column == "Total arrivals")
+long_data_four <- subset(long_data_four, Year >= '2000-12-01')
 
 ggplot(long_data_four, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
   geom_point() +
@@ -144,6 +156,7 @@ long_data_GDP$Year <- as.Date(long_data_GDP$Year, format='%Y')
 happiness_df <- read_excel("DataForFigure2.1WHR2023.xls")
 
 happiness_df<-as.data.frame(happiness_df)
+happiness_df
 ```
 
 ```{r}
@@ -162,7 +175,7 @@ long_data_arrivals$Year <- as.Date(long_data_arrivals$Year, format='%Y')
 ```{r}
 library(ggridges)
 
-top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China","Malaysia","Saudi Arabia")
+top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China, People's Republic of","Canada","Saudi Arabia")
 
 GDP_ten <- subset(long_data_GDP, Country %in% top_ten_arrivals)
 GDP_ten$GDP <- as.numeric(GDP_ten$GDP)
@@ -186,7 +199,7 @@ GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0
 library(devtools)
 #devtools::install_github("timelyportfolio/parcoords", force=TRUE)
 
-top_ten_arrivals <- c("Spain","Italy","Turkey","Croatia","Hungary","Denmark","Greece","China","Malaysia","Saudi Arabia")
+top_ten_arrivals <- c("Spain","Italy","Turkey","Croatia","Hungary","Denmark","Greece","China","Canada","Saudi Arabia")
 
 happiness_df <- happiness_df %>%
   rename(Country_name = `Country name`)
@@ -202,4 +215,13 @@ p <- ggparcoord(happy_ten,
   theme(axis.text.y = element_text(angle = 45, hjust = 1))
 
 ggplotly(p)
+```
+
+```{r}
+happiness_data <- happy_ten[,7:11]
+happiness_data <- na.omit(happiness_data)
+pca_results <- prcomp(happiness_data, scale. = TRUE)
+
+biplot(pca_results, scale = 0)
+
 ```
