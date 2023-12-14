@@ -100,6 +100,24 @@ ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = `2022`, fill 
 ```
 
 ```{r}
+inbound_arrivals$`1995`<- as.numeric(inbound_arrivals$`1995`)
+
+long_data <- pivot_longer(inbound_arrivals, cols = c(-Merged_Column,-Country, -Units, -Notes, -Series), names_to = "Year", values_to = "Arrivals")
+
+long_data$Year <- as.Date(long_data$Year, format='%Y')
+
+top_four <- c("SPAIN","ITALY","TÜRKIYE","CROATIA")
+
+long_data_four <- subset(long_data, Country %in% top_four)
+long_data_four <- subset(long_data_four, Merged_Column == "Total arrivals")
+
+ggplot(long_data_four, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
+  geom_point() +
+  facet_wrap(~ Country, scales = "free_y")+
+  labs(title="Visits since 1995 in most popular countries")
+```
+
+```{r}
 climate_df <- read.csv("Climate-related_Disasters_Frequency.csv")
 climate_df <- climate_df[,c(2,5,11:53)]
 names(climate_df) <- gsub("F", "", names(climate_df))
@@ -160,7 +178,8 @@ ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
 ```
 
 ```{r}
-GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)
+GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+
+  labs(title = "Happiness indicators in all countries", x = "Indicators", y = "Value")
 ```
 
 ```{r}
@@ -178,24 +197,9 @@ library(plotly)
 library(GGally)
 
 p <- ggparcoord(happy_ten,
-    columns = 6:11, group = 1, scale = "std")
+    columns = 6:11, group = 1, scale = "std")+
+  labs(title = "Happiness Indicators in Top 10 Visited Countries", x = "Indicator", y = "Value")+
+  theme(axis.text.y = element_text(angle = 45, hjust = 1))
 
 ggplotly(p)
-```
-
-```{r}
-inbound_arrivals$`1995`<- as.numeric(inbound_arrivals$`1995`)
-
-long_data <- pivot_longer(inbound_arrivals, cols = c(-Merged_Column,-Country, -Units, -Notes, -Series), names_to = "Year", values_to = "Arrivals")
-
-long_data$Year <- as.Date(long_data$Year, format='%Y')
-
-top_four <- c("SPAIN","ITALY","TÜRKIYE","CROATIA")
-
-long_data_four <- subset(long_data, Country %in% top_four)
-long_data_four <- subset(long_data_four, Merged_Column == "Total arrivals")
-
-ggplot(long_data_four, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
-  geom_point() +
-  facet_wrap(~ Country, scales = "free_y")
 ```
