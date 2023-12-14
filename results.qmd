@@ -103,6 +103,7 @@ top_countries <- top_countries %>%
   arrange(Year, Arrivals) %>%
   mutate(Country = factor(Country, unique(Country))) 
 
+
 # Plotting faceted diverging bar chart
 ggplot(top_countries, aes(x = fct_reorder(Country, Arrivals), y = (Arrivals)*1000, fill = (Arrivals)/1000)) +
   geom_col() +
@@ -423,7 +424,11 @@ Other than Italy and China, we do not see any other top visited countries in the
 
 ```{r}
 #Identify top 10 countries
-climate_countries_arrivals <- tail(top_bottom_countries, 10)
+top_ten_arrivals_caps <- c("SPAIN","ITALY","TÜRKIYE","CROATIA","HUNGARY","DENMARK","GREECE","CHINA","CANADA","SAUDI ARABIA")
+top_ten_countries <- subset(total_arrivals_2022, Country %in% top_ten_arrivals_caps)
+top_ten_countries <- top_ten_countries[, c(1,2,7)]
+
+climate_countries_arrivals <- tail(top_ten_countries, 10)
 
 # Selecting columns from world_regions to join on
 country_codes <- expenditures_raw %>%
@@ -465,7 +470,7 @@ ggplot(disasters_top10_2022, aes(x = reorder(Country, -Count), y = Count, fill =
   scale_fill_manual(values = color_palette)
 ```
 
-Looking specifically at the top visited countries,
+Looking specifically at the top visited countries, we can see that the country with the most climate disasters in 2022 was China with seven disasters, followed by Canada with six. These are the two largest countries by area of our top ten, so it makes sense that they would have the most climate disasters by their sheer size. Every other country had three or less climate disasters in 2022. The most common disasters in the top visited countries were storms and floods. Two countries, Hungary and Saudi Arabia, did not report any climate disasters in 2022. Further, three of the top visited countries only had one climate disaster in 2022. Clearly, the countries that most tourists visit are not risky countries when it comes to climate change.
 
 # 4. Tourism and Happiness
 
