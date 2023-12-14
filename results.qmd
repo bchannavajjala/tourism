@@ -233,6 +233,8 @@ ggplot(tourism_gdp_filtered, aes(x = Total, y = fct_reorder(GeoAreaName, Total))
 
 ```
 
+Now, we will look at how much of a country's GDP comes from tourism. For this metric, we only have data up to 2021, but we have seen in previous plots that tourism does not follow usual patterns after the pandemic, so we can safely study trends up to 2020, and assume they were typical for the pre-pandemic world. We can see that China's region of Macao receives by far the highest percentage of GDP from tourism compared to any other country between 2018 and 2020. Most other countries gaining a large percentage of their GDP from tourism are smaller island nations, such as Guam, Fiji, Jamaica, etc... However, we do see some of the top ten receiving a noteworthy amount of GDP from tourism, namely Croatia, Spain, Greece, Hungary, and Italy. From this, we can conclude that many of the most visited countries do benefit economically from their tourism industries, but many smaller countries that may not be the most visited gain more positive impact on their economies from the tourism they receive.
+
 ## Heatmap of Inbound Tourism Expenditure from 2018-2022
 
 ```{r fig.height = 7, fig.width= 10}
@@ -316,6 +318,10 @@ ggplot(expenditures_top20, aes(x = as.factor(Year), y = Country, fill = Expendit
 
 
 ```
+
+We have seen how tourism effects GDP, now, conversely, we want to see how much certain countries spend on tourism. In the first heatmap, we can see that the spend on tourism in the United States dwarfs that of almost every country. It is possible that the United States is not noted as one of the most visited countries because, being such a large nation, there is a large amount of tourism within the country, which would not contribute to arrivals. Many other countries see more international arrivals due to their size.
+
+Despite that, the United States still spends the most money on inbound tourism. We can also see in the heatmap that there was a large decline in tourism expenditure in 2020 and 2021 due to Covid-19.
 
 ## Climate Disaster Frequencies for World Regions from 2018-2022
 
