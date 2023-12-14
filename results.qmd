@@ -76,13 +76,8 @@ inbound_arrivals <- inbound_arrivals %>%
 ```
 
 ```{r}
-inbound_arrivals
-```
-
-```{r}
 total_arrivals <- subset(inbound_arrivals, Merged_Column == 'Total arrivals')
 total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,33)])
-total_arrivals_2022
 ```
 
 ```{r}
@@ -106,8 +101,11 @@ ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = `2022`, fill 
 
 ```{r}
 climate_df <- read.csv("Climate-related_Disasters_Frequency.csv")
-climate_df <- climate_df[,c(1,2,5,11:53)]
-climate_df
+climate_df <- climate_df[,c(2,5,11:53)]
+names(climate_df) <- gsub("F", "", names(climate_df))
+
+long_data_climate <- pivot_longer(climate_df, cols = c(-Country, -Indicator), names_to = "Year", values_to = "Disasters")
+long_data_climate$Year <- as.Date(long_data_climate$Year, format='%Y')
 ```
 
 ```{r}
@@ -120,13 +118,78 @@ names(GDP_df)[names(GDP_df)=="Real GDP growth (Annual percent change)"] <- "Coun
 GDP_df <- GDP_df %>%
   mutate_all(~ ifelse(. == "no data", NA, .))
 
-GDP_df
+long_data_GDP <- pivot_longer(GDP_df, cols = -Country, names_to = "Year", values_to = "GDP")
+long_data_GDP$Year <- as.Date(long_data_GDP$Year, format='%Y')
 ```
 
 ```{r}
 happiness_df <- read_excel("DataForFigure2.1WHR2023.xls")
 
 happiness_df<-as.data.frame(happiness_df)
+```
 
-happiness_df
+```{r}
+top_bottom_countries_all <- inbound_arrivals %>%
+  filter(Merged_Column == "Total arrivals") %>%
+  arrange(abs(`2022`)) %>%
+  filter(row_number() <= 10 | row_number() > n() - 10)
+
+top_bottom_countries_all$`1995`<- as.numeric(top_bottom_countries_all$`1995`)
+
+long_data_arrivals <- pivot_longer(top_bottom_countries_all, cols = c(-Merged_Column,-Country, -Units, -Notes, -Series), names_to = "Year", values_to = "Arrivals")
+
+long_data_arrivals$Year <- as.Date(long_data_arrivals$Year, format='%Y')
+```
+
+```{r}
+library(ggridges)
+
+top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China","Malaysia","Saudi Arabia")
+
+GDP_ten <- subset(long_data_GDP, Country %in% top_ten_arrivals)
+GDP_ten$GDP <- as.numeric(GDP_ten$GDP)
+
+desired_values <- c(-15, -10, -5, 0, 5, 10, 15) 
+
+ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
+  geom_density_ridges(scale = 1.5, alpha = 0.6) +
+  theme_ridges() +
+  labs(title = "Top 10 Arrivals GDP", x = "GDP", y = "Country") +
+  scale_fill_brewer(palette = "Set1")
+  scale_x_discrete(breaks = desired_values)
+```
+
+```{r}
+GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)
+```
+
+```{r}
+library(devtools)
+#devtools::install_github("timelyportfolio/parcoords", force=TRUE)
+
+top_ten_arrivals <- c("Spain","Italy","Turkey","Croatia","Hungary","Denmark","Greece","China","Malaysia","Saudi Arabia")
+
+happiness_df <- happiness_df %>%
+  rename(Country_name = `Country name`)
+
+happy_ten <- subset(happiness_df, Country_name %in% top_ten_arrivals)
+
+library(plotly)
+library(GGally)
+
+p <- ggparcoord(happy_ten,
+    columns = 6:11, group = 1, scale = "std")
+
+ggplotly(p)
+```
+
+```{r}
+top_four <- c("SPAIN","ITALY","TÜRKIYE","CROATIA")
+
+four_arrivals <- subset(long_data_arrivals, Country %in% top_four)
+
+ggplot(long_data_arrivals, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
+  geom_line() 
+  facet_wrap(~ Country, scales = "free_y") +
+  labs(x = "X-axis Label", y = "Y-axis Label", title = "Faceted Line Plot")
 ```
