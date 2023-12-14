@@ -2,6 +2,7 @@
 
 ```{r}
 #Read data from excel
+#http://www.sthda.com/english/wiki/reading-data-from-excel-files-xls-xlsx-into-r
 #install.packages("readxl")
 
 library(readxl)
