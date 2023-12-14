@@ -126,7 +126,7 @@ long_data_four <- subset(long_data_four, Year >= '2000-12-01')
 ggplot(long_data_four, aes(x = Year, y = Arrivals, group = Country, color = Country)) +
   geom_point() +
   facet_wrap(~ Country, scales = "free_y")+
-  labs(title="Visits since 1995 in most popular countries")
+  labs(title="Visits since 2000 in most popular countries")
 ```
 
 ```{r}
@@ -185,20 +185,22 @@ desired_values <- c(-15, -10, -5, 0, 5, 10, 15)
 ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
   geom_density_ridges(scale = 1.5, alpha = 0.6) +
   theme_ridges() +
-  labs(title = "Top 10 Arrivals GDP", x = "GDP", y = "Country") +
+  labs(title = "GDP for Top 10 Visited Countries", x = "GDP", y = "Country") +
   scale_fill_brewer(palette = "Set3") +
   scale_x_discrete(breaks = desired_values)
 ```
 
 ```{r}
 GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+
-  labs(title = "Happiness indicators in all countries", x = "Indicators", y = "Value")
+  labs(title = "Happiness indicators in all countries", x = "Indicators", y = "Value")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r}
 library(redav)
 happiness_data <- happy_ten[,c(1,7:11)]
 happiness_data <- na.omit(happiness_data)
-draw_biplot(happiness_data)
+draw_biplot(happiness_data)+
+  labs(title = "Happiness Indicators in Most Visited Countries")
 
 ```
