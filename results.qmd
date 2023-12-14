@@ -415,7 +415,7 @@ climate_countries_total %>%
   theme(axis.text.x = element_text(angle=45, vjust = 0.95, hjust = 1))
 ```
 
-Looking on a more granular level, we can see the countries that have had the most climate disasters since 2018. The United States dominates again, with over 125 disasters in the past five years. We note that there are only two countries in the top ten most visited that are included in the top twenty for climate disasters: China and Italy. Like the United States, China is an enormous, geographically diverse country, so having many climate disasters in these years is not surprising. Italy, however, is much smaller, but we know that Italy is facing many issues with flooding, often tied to tourism, especially in Venice. (https://www.cnn.com/2019/11/14/europe/venice-floods-problems-intl/index.html)
+Looking on a more granular level, we can see the countries that have had the most climate disasters since 2018. The United States dominates again, with over 125 disasters in the past five years. We note that there are only two countries in the top ten most visited that are included in the top twenty for climate disasters: China and Italy. Like the United States, China is an enormous, geographically diverse country, so having many climate disasters in these years is not surprising. Italy, however, is much smaller, but we know that Italy is facing many issues with flooding, often tied to tourism, especially in Venice. (<https://www.cnn.com/2019/11/14/europe/venice-floods-problems-intl/index.html>)
 
 Other than Italy and China, we do not see any other top visited countries in the list of most climate disasters, indicating that tourists flock to countries that do not pose climate risks, especially those that may impact travel, such as storms or floods.
 

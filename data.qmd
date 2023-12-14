@@ -32,14 +32,15 @@ Based on our multi-faceted approach to understanding tourism, we plan to use the
 
     -   The dataset also contains expenditure information for domestic and outbound travels
 
-    -   We will use this data to identify trends in inbound, domestic and outbound travel across countries and larger regions. Visualizing the inbound expenditures data, especially, enables us to understand how much tourists contribute to local economies at a high level
+    -   We will use this data to identify trends in inbound travel across countries and larger regions. Visualizing the inbound expenditures data, especially, enables us to understand how much tourists contribute to local economies at a high level
 
 **Tourism and the Economy:**
 
--   IMF GDP Growth: [https://www.imf.org/external/datamapper/NGDP_RPCH\@WEO/OEMDC/ADVEC/WEOWORLD](https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/OEMDC/ADVEC/WEOWORLD)
+-   IMF GDP Growth: [https://www.imf.org/external/datamapper/NGDPD\@WEO/OEMDC/ADVEC/WEOWORLD](https://www.imf.org/external/datamapper/NGDPD@WEO/OEMDC/ADVEC/WEOWORLD)
 
-    -   This dataset captures the annual percent change in GDP for all countries from 1980 through 2023, with predictions until 2028. We can use the dataset to identify the overall trend in GDP across countries, as a baseline for understanding how tourism may factor into it.
-    -   We envision plotting this data on a map with a color scale that helps us visually identify which countries have an overall increase in GDP and which are seeing a decreasing trend in GDP.
+-   This dataset captures the actual GDP value (in billions) for all countries from 1980 through 2023, with predictions until 2028. We can use the dataset to identify the overall trend in GDP across countries, as a baseline for understanding how tourism may factor into it.
+
+    -   We envision plotting this data to study how tourism effects GDP and whether richer countries see more tourism.
 
 -   Statista Travel GDP Contributions: <https://www.statista.com/statistics/233223/travel-and-tourism--total-economic-contribution-worldwide/> & <https://www.statista.com/statistics/292479/total-contribution-of-travel-and-tourism-to-gdp-in-selected-countries/>
 
@@ -89,11 +90,11 @@ library(readxl)
 library(tidyr)
 library(dplyr)
 
-sheet_names <- excel_sheets("/Users/bhavanachannavajjala/Columbia/Fall2023/EDAV/Final Project/UNWTO Data.xlsx")
+sheet_names <- excel_sheets("data_raw/unwto-all-data-download_102023.xlsx")
 
 #create a data frame for each sheet and store them in all_dfs
 all_dfs <- lapply(sheet_names, function(sheet) {
-  read_excel("/Users/bhavanachannavajjala/Columbia/Fall2023/EDAV/Final Project/UNWTO Data.xlsx", sheet = sheet)
+  read_excel("data_raw/unwto-all-data-download_102023.xlsx", sheet = sheet)
 })
 ```
 
@@ -189,7 +190,7 @@ When we just look at total arrivals for inbound arrival data in 2022, we see a l
 ### Climate-related Disasters Data
 
 ```{r}
-climate_df <- read.csv("/Users/bhavanachannavajjala/Columbia/Fall2023/EDAV/Final Project/Climate-related_Disasters_Frequency.csv")
+climate_df <- read.csv("data_raw/Climate-related_Disasters_Frequency.csv")
 ```
 
 ```{r}
@@ -209,7 +210,7 @@ Climate data is also missing a decent amount of data, so we will want to take a 
 ### GDP Data
 
 ```{r}
-GDP_df <- read_excel("/Users/bhavanachannavajjala/Columbia/Fall2023/EDAV/Final Project/imf-dm-export-20231130.xls") 
+GDP_df <- read_excel("data_raw/imf-dm-export-20231214.xls") 
 
 GDP_df<-as.data.frame(GDP_df[-1,])
 
@@ -220,7 +221,7 @@ GDP_df <- GDP_df %>%
 ```
 
 ```{r}
-happiness_df <- read_excel("/Users/bhavanachannavajjala/Columbia/Fall2023/EDAV/Final Project/DataForFigure2.1WHR2023 (1).xls")
+happiness_df <- read_excel("data_raw/DataForFigure2.1WHR2023.xls")
 
 happiness_df<-as.data.frame(happiness_df)
 ```
