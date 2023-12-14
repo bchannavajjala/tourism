@@ -7,6 +7,7 @@
 library(readxl)
 library(tidyr)
 library(dplyr)
+library(ggplot2)
 
 sheet_names <- excel_sheets("unwto-all-data-download_102023.xlsx")
 
@@ -80,6 +81,8 @@ total_arrivals <- subset(inbound_arrivals, Merged_Column == 'Total arrivals')
 total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,33)])
 ```
 
+## Top and Bottom 10 Countries by Total Arrivals in 2022
+
 ```{r}
 library(ggplot2)
 library(dplyr)
@@ -101,6 +104,8 @@ ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = (`2022`)*1000
 ```
 
 In the plot above, we can see the top 10 and bottom 10 countries with the most and least total arrivals in 2022. Spain tops the list with over 100 million arrivals in 2022. In second place, Italy had almost 75 million arrivals. Spain and Italy had by far the most arrivals, with places three through ten having around 50 million or less arrivals in 2022. It is not surprising that the most visited countries are in Europe, since travel within Europe is very common for European Union citizens. Similarly, Malaysia and Saudi Arabia are quite central countries, each surrounded by many other countries, leading us to believe that neighboring citizens may travel to these two countries often.
+
+## Visits from 1995 for 4 most popular countries
 
 ```{r}
 inbound_arrivals$`1995`<- as.numeric(inbound_arrivals$`1995`)
@@ -165,6 +170,8 @@ long_data_arrivals <- pivot_longer(top_bottom_countries_all, cols = c(-Merged_Co
 long_data_arrivals$Year <- as.Date(long_data_arrivals$Year, format='%Y')
 ```
 
+## Ridgeline Plot of GDP for Countries with Top 10 Arrivals
+
 ```{r}
 library(ggridges)
 
@@ -184,6 +191,250 @@ ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
 ```
 
 In the ridgeline plots above, we see the GDP distribution for the top ten most visited countries in 2022. GDP data dates from 1980 to 2022. We can see that the median GDP of these countries are all quite comparable, with only China, Malaysia, and Turkey having a bit higher medians than the other seven countries. It is interesting to note trends in GDP for countries that can be grouped together. For instance, Italy, Spain, and Denmark may be considered Western and Southern European, and they all have similar trends in GDP distribution, with one stark mode and very small tails. Countries in Eastern Europe, namely Hungary, Greece, Croatia, and even Turkey (though most of Turkey is part of Asia), have similar trends as well, with one main mode, but some trailing data to the left of the mode. The three other Asian countries stand somewhat on their own, as they are all spread far across the continent and have very different economies. It is interesting to note the spread of GDP in Saudi Arabia, meaning that GDP has fluctuated greatly in the country since 1995.
+
+## Travel Contribution to GDP from 2018-2021
+
+```{r fig.height = 17, fig.width= 12}
+#| warning: false
+
+library(Lock5withR)
+
+tourism_gdp_raw <-read.csv("tourism_gdp_contribution.csv")
+
+# Filter data for years 2018-2021. Only countries that have data for those 4 years will be graphed.
+tourism_gdp_filtered <- tourism_gdp_raw %>%
+  group_by(GeoAreaName) %>%
+  filter(TimePeriod >= 2018 & TimePeriod <= 2021)
+
+#Building faceted Cleveland Dot Plot
+ggplot(tourism_gdp_filtered, aes(x = Total, y = fct_reorder(GeoAreaName, Total))) +
+  geom_point(color = "blue") +
+  ggtitle("Avg. Tourism Contribution to GDP between 2008 and 2021") +
+  facet_wrap(~TimePeriod) +
+  xlab("Average Contribution of Tourism to GDP") +
+  ylab("Country")
+  theme_linedraw()
+
+```
+
+## Heatmap of Inbound Tourism Expenditure from 2018-2022
+
+```{r fig.height = 7, fig.width= 10}
+library(magrittr)
+library(tidyverse)
+library(RColorBrewer)
+
+expenditures_raw <-read.csv("Inbound_Expenditure.csv")
+
+#Remove years before 2017
+remove_columns <- c("X2012", "X2013", "X2014", "X2015", "X2016", "X2017")
+expenditures_raw <- select(expenditures_raw, -remove_columns)
+
+expenditures_raw <- rename(expenditures_raw,
+                      "Country" = Basic.data.and.indicators,
+                      "2018" = X2018,
+                      "2019" = X2019,
+                      "2020" = X2020,
+                      "2021" = X2021,
+                      "2022" = X2022)
+
+expenditures_raw$`2018`<- as.numeric(gsub(",", "",expenditures_raw$`2018`))
+expenditures_raw$`2019` <- as.numeric(gsub(",", "",expenditures_raw$`2019`))
+expenditures_raw$`2020` <- as.numeric(gsub(",", "",expenditures_raw$`2020`))
+expenditures_raw$`2021` <- as.numeric(gsub(",", "",expenditures_raw$`2021`))
+expenditures_raw$`2022` <- as.numeric(gsub(",", "",expenditures_raw$`2022`))
+
+#Remove rows with NAs between 2018-2022. We only want to consider countries for which we have complete expenditure data
+expenditures_filtered <- expenditures_raw %>%
+  filter(!is.na(`2018`) & !is.na(`2019`) & !is.na(`2020`) & !is.na(`2021`) & !is.na(`2022`))
+
+# Reshape data into long format for plotting
+expenditures_pivot <- pivot_longer(expenditures_filtered, 
+                                   cols = c(`2018`, `2019`, `2020`, `2021`, `2022`),
+                                   names_to = "Year",
+                                   values_to = "Expenditure")
+
+# Calculate the mean expenditure for each country
+mean_expenditure_all <- expenditures_pivot %>%
+  group_by(Country) %>%
+  summarise(mean_expenditure = mean(Expenditure)) %>%
+  arrange(desc(mean_expenditure))
+
+# Select the top 20 countries including the US
+top_countries_us <- head(mean_expenditure_all, 20)$Country
+
+# Filter data for the top 20 countries including the US
+expenditures_top20_us <- expenditures_pivot %>%
+  filter(Country %in% top_countries_us)
+
+#Setting Color Scheme for US Heatmap
+heatmap_colors_1 <- brewer.pal(n=10,name = "YlGnBu")
+
+# Plotting Heatmap with United States
+ggplot(expenditures_top20_us, aes(x = as.factor(Year), y = Country, fill = Expenditure)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(title = "Inbound Tourism Expenditure from 2018-2022 for Top 20 Countries",
+       x = "Year",
+       y = "Country",
+       fill = "Expenditure")
+
+# Select the top 20 countries excluding the US
+top_countries <-  mean_expenditure_all %>%
+  filter(Country != "UNITED STATES OF AMERICA") 
+
+top_countries <- head(top_countries, 20)$Country
+
+# Filter data for the top 20 countries excluding the US
+expenditures_top20 <- expenditures_pivot %>%
+  filter(Country %in% top_countries)
+
+# Plotting Heatmap with United States
+ggplot(expenditures_top20, aes(x = as.factor(Year), y = Country, fill = Expenditure)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(title = "Inbound Tourism Expenditure from 2018-2022 for Top 20 Countries (excluding US)",
+       x = "Year",
+       y = "Country",
+       fill = "Expenditure")
+
+
+```
+
+## Climate Disaster Frequencies for World Regions from 2018-2022
+
+```{r fig.height = 7, fig.width= 10}
+library(vcd)
+library(stringr)
+
+# Read in climate dataset and regions dataset
+climate_raw <- read.csv("climate_new.csv")
+world_regions <- read.csv("world_regions.csv")
+
+#Replace NAs with 0s
+climate_raw[is.na(climate_raw)] <- 0
+
+#Recode disaster names
+climate_raw <- climate_raw %>%
+  mutate(event_type = case_when(
+    str_detect(Indicator, "Drought") ~ "Drought",
+    str_detect(Indicator, "Extreme temperature") ~ "Extreme Temperature",
+    str_detect(Indicator, "Flood") ~ "Flood",
+    str_detect(Indicator, "Landslide") ~ "Landslide",
+    str_detect(Indicator, "Storm") ~ "Storm",
+    str_detect(Indicator, "Wildfire") ~ "Wildfire",
+    str_detect(Indicator, "TOTAL") ~ "Total",
+    TRUE ~ NA  # Default case if none of the above conditions are met
+  ))
+
+#Remove years before 2018
+columns_to_remove <- c("F2000", "F2001", "F2002", "F2003", "F2004", "F2005", "F2006", "F2007", "F2008", "F2009", "F2010", "F2011", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017")
+climate_raw <- select(climate_raw, -columns_to_remove)
+
+#Join datasets on Country Code
+## Rename columns in climate data set
+climate_raw <- rename(climate_raw,
+                      Code = ISO3,
+                      "2018" = F2018,
+                      "2019" = F2019,
+                      "2020" = F2020,
+                      "2021" = F2021,
+                      "2022" = F2022)
+
+##Selecting columns from world_regions to join on
+world_regions <- world_regions %>%
+  dplyr::select(Code, World.Region.according.to.the.World.Bank) 
+
+##Join operation
+climate_joined <- left_join(climate_raw, world_regions)
+
+#Pivoting the years and Disaster Count
+climate_pivot <- pivot_longer(climate_joined, cols = "2018":"2022",
+                               names_to = "Years",
+                               values_to = "Count")
+
+# Make sure 'event_type' is a factor to ensure proper stacking
+climate_pivot$event_type <- factor(climate_pivot$event_type)
+
+#Remove Total Column for Stacked Bar Chart
+climate_category_subset <- subset(climate_pivot, event_type != "Total")
+
+#Import color package
+color_palette <- brewer.pal(n = 7, name = "Set2")
+
+# Create a stacked bar chart with facets
+ggplot(climate_category_subset, aes(x = World.Region.according.to.the.World.Bank, y = Count, fill = event_type)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~Years, scales = "fixed") +  # Facet by Year
+  labs(title = "Climate Disasters by World Region from 2018 to 2022", x = "World Region", y = "Number of Disasters", fill = "Disaster Type") +
+  theme(axis.text.x = element_text(angle=90, vjust = 0.5, hjust = 1)) +
+  scale_fill_manual(values = color_palette)
+```
+
+## Top 20 Countries with the most Climate Disasters
+
+```{r}
+# Group by country and calculate the total number of disasters
+climate_countries_total <- climate_category_subset %>%
+  count(Country, wt = Count) %>%
+  top_n(20, n)
+
+climate_countries_total %>%
+  ggplot(aes(x=reorder(Country, -n),y=n)) +
+  geom_bar(stat = "identity",fill = "cornflowerblue") +
+  ggtitle("Top 20 Countries with most Climate Disasters from 2018-2022") +
+  xlab("Countries") +
+  ylab("Climate Disaster Count") +
+  theme(axis.text.x = element_text(angle=45, vjust = 0.95, hjust = 1))
+```
+
+## Climate Disasters from 2022 for Countries with most Arrivals
+
+```{r}
+#Identify top 10 countries
+climate_countries_arrivals <- tail(top_bottom_countries, 10)
+
+# Selecting columns from world_regions to join on
+country_codes <- expenditures_raw %>%
+  dplyr::select(Country, Country.Code)
+ 
+# Join operation
+climate_arrivals_joined <- left_join(climate_countries_arrivals, country_codes)
+
+# Find top 10 countries in Subset Dataframe 
+top_arrivals <- climate_arrivals_joined$Country.Code
+
+disasters_top10 <- climate_category_subset %>%
+  filter(Code %in% top_arrivals)
+
+#Filtering to only 2022 disasters
+disasters_top10_2022 <- disasters_top10 %>%
+  filter(Years == 2022)
+
+#Calculate total for the top 10 Countries for 2022 only
+# Group by country and calculate the total number of disasters
+disasters_2022_total <- disasters_top10_2022 %>%
+  count(Country, wt = Count) %>%
+  top_n(10, n)
+
+#Plot top 10 countries
+disasters_2022_total %>%
+  ggplot(aes(x=reorder(Country, -n),y=n)) +
+  geom_bar(stat = "identity",fill = "cornflowerblue") +
+  ggtitle("2022 Climate Disasters for Top Arrival Countries") +
+  xlab("Countries") +
+  ylab("Climate Disaster Count") +
+  theme(axis.text.x = element_text(angle=90, vjust = 0.95, hjust = 1))
+
+#Stacked Bar Chart to break down disaster type
+ggplot(disasters_top10_2022, aes(x = reorder(Country, -Count), y = Count, fill = event_type)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Climate Disasters for Top Arrival Countries in 2022", x = "Country", y = "Number of Disasters", fill = "Disaster Type") +
+  theme(axis.text.x = element_text(angle=90, vjust = 0.5, hjust = 1)) +
+  scale_fill_manual(values = color_palette)
+```
+
+## Happiness Indicators in Top 10 Visited Countries
 
 ```{r}
 GGally::ggparcoord(data=happiness_df,columns = 7:11, scale="std", alphaLines = 0.5)+
