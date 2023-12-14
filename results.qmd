@@ -78,7 +78,7 @@ inbound_arrivals <- inbound_arrivals %>%
 
 ```{r}
 total_arrivals <- subset(inbound_arrivals, Merged_Column == 'Total arrivals')
-total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,33)])
+total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,29,30,31,32,33)])
 ```
 
 ## Top and Bottom 10 Countries by Total Arrivals in 2022
@@ -86,28 +86,41 @@ total_arrivals_2022 <- na.omit(total_arrivals[,c(1,2,33)])
 ```{r}
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(forcats)
 
-top_bottom_countries <- total_arrivals_2022 %>%
-  filter(Merged_Column == "Total arrivals") %>%
-  arrange(abs(`2022`)) %>%
-  filter(row_number() <= 10 | row_number() > n() - 10)
+top_countries <- total_arrivals_2022 %>%
+  select(Country, `2018`, `2019`, `2020`, `2021`, `2022`) %>%
+  pivot_longer(cols = -Country, names_to = "Year", values_to = "Arrivals") %>%
+  group_by(Year) %>%
+  mutate(rank = dense_rank(desc(Arrivals))) %>%
+  filter(rank <= 10) %>%
+  arrange(Year, desc(Arrivals))
 
-ggplot(top_bottom_countries, aes(x = reorder(Country, `2022`), y = (`2022`)*1000, fill = `2022` > 0)) +
-  geom_bar(stat = "identity", position = "identity", color = "black") +
-  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
-  scale_fill_manual(values = c("negative" = "red", "positive" = "blue"),
-                    labels = c("Negative", "Positive")) +
-  labs(title = "Top and Bottom 10 Countries by Total Arrivals in 2022",
-       x = "Country", y = "Total Arrivals") +
-  theme_minimal() +
-  coord_flip()
+top_countries <- top_countries %>%
+  arrange(Year, Arrivals) %>%
+  mutate(Country = factor(Country, unique(Country))) 
+
+# Plotting faceted diverging bar chart
+ggplot(top_countries, aes(x = fct_reorder(Country, Arrivals), y = (Arrivals)*1000, fill = (Arrivals)*1000)) +
+  geom_col() +
+  coord_flip() +
+  facet_wrap(.~ Year, scales = "free") +
+  labs(title = "Top 10 Visited Countries by Year",
+       x = "Country",
+       y = "Arrivals",
+       fill = "Arrivals") +
+  theme_minimal()+
+  scale_fill_continuous(labels = function(x) format(x, scientific = FALSE))+
+  theme(axis.text.x = element_blank())
 ```
 
-In the plot above, we can see the top 10 and bottom 10 countries with the most and least total arrivals in 2022. Spain tops the list with over 100 million arrivals in 2022. In second place, Italy had almost 75 million arrivals. Spain and Italy had by far the most arrivals, with places three through ten having around 50 million or less arrivals in 2022. It is not surprising that the most visited countries are in Europe, since travel within Europe is very common for European Union citizens. Similarly, Malaysia and Saudi Arabia are quite central countries, each surrounded by many other countries, leading us to believe that neighboring citizens may travel to these two countries often.
+In the plots above, we see the top 10 most visited countries by total arrivals for the years 2018-2022. Over these five years, the countries in the top ten do not shift very much. The main shift comes from China, where after 2020, visits drop significantly. Macao and Hong Kong drop off of the list entirely by 2022. China was the most visited country in 2018 and 2019, but is overtaken by Italy in 2020 and then Spain in 2021 and 2022. It is not difficult to see the impact of the corona virus pandemic in this data. Not only with countries visited, but also in the number of travelers. The most visited countries decreased by up to four times between 2019 and 2020. Some recovery in travel began in 2021, but was not notable until 2022, especially in Spain.
 
-## Visits from 1995 for 4 most popular countries
+## Visits from 2000 for 4 most popular countries
 
 ```{r}
+
 inbound_arrivals$`1995`<- as.numeric(inbound_arrivals$`1995`)
 
 long_data <- pivot_longer(inbound_arrivals, cols = c(-Merged_Column,-Country, -Units, -Notes, -Series), names_to = "Year", values_to = "Arrivals")
@@ -118,15 +131,16 @@ top_four <- c("SPAIN","ITALY","TÜRKIYE","CROATIA")
 
 long_data_four <- subset(long_data, Country %in% top_four)
 long_data_four <- subset(long_data_four, Merged_Column == "Total arrivals")
+long_data_four <- subset(long_data_four, Year >= '2000-12-01')
 
 ggplot(long_data_four, aes(x = Year, y = (Arrivals)*1000, group = Country, color = Country)) +
   geom_point() +
   facet_wrap(~ Country, scales = "free_y")+
-  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
-  labs(title="Visits since 1995 in most popular countries", y= "Arrivals")
+  scale_y_continuous(labels = function(x) format(x, scientific = FALSE))+
+  labs(title="Visits since 2000 in most popular countries", y="Arrivals")
 ```
 
-Looking at the top four visited countries in 2022, we see that they have all seen significant growth in visitors since 1995. Italy is somewhat of an exception, with a more steady flow of inbound travelers from 1995 to around 2010. Turkey and Croatia have seen the largest growth in arrivals since 1995. Croatia and Spain both had small peaks around 2008. Of course, all countries had a dramatic drop in arrivals in 2020 and 2021, with a large jump in 2022, as pandemic travel restrictions have relaxed. Turkey did have more fluctuation than the other countries even before 2020, perhaps due to the earthquake in 2017.
+Looking at the top four most visited countries in 2022, we see similar trends in travel from 2000 to 2022. All four countries have seen a great increase in arrivals since 2000. However, Spain and Italy both already had over 60 million arrivals per year starting in 2000, and have only grown since. Croatia was already seeing almost 40 million arrivals per year in 2000, peaking at 60 million in 2019. Turkey has seen the most growth, starting at 10 million arrivals per year in 2000, and peaking over 50 million in both 2019 and 2022. In fact, Turkey is the only country that has returned to its pre-pandemic level of arrivals. All four countries saw a drastic decrease in arrivals in 2020, with 2020 numbers being the lowest recorded since 2000 for Croatia, Italy, and Spain. Turkey has had more fluctuation in travel numbers since 2017, possibly due to earthquakes as well as Covid. Croatia and Spain had small peaks in 2008, perhaps slowing down in 2009 and 2010 due to the global financial crisis. From the growth before the pandemic, we can expect these countries to continue to see more tourism in the post-pandemic world.
 
 ```{r}
 climate_df <- read.csv("Climate-related_Disasters_Frequency.csv")
@@ -175,9 +189,11 @@ long_data_arrivals$Year <- as.Date(long_data_arrivals$Year, format='%Y')
 ```{r}
 library(ggridges)
 
-top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China, People's Republic of","Malaysia","Saudi Arabia")
+top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China, People's Republic of","Canada","Saudi Arabia")
 
 GDP_ten <- subset(long_data_GDP, Country %in% top_ten_arrivals)
+GDP_ten <- subset(GDP_ten, Year >= '2000-12-01')
+GDP_ten <- subset(GDP_ten, Year <= '2023-12-01')
 GDP_ten$GDP <- as.numeric(GDP_ten$GDP)
 
 desired_values <- c(-15, -10, -5, 0, 5, 10, 15) 
@@ -185,12 +201,12 @@ desired_values <- c(-15, -10, -5, 0, 5, 10, 15)
 ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
   geom_density_ridges(scale = 1.5, alpha = 0.6) +
   theme_ridges() +
-  labs(title = "Top 10 Arrivals GDP", x = "GDP", y = "Country") +
-  scale_fill_brewer(palette = "Set3")
+  labs(title = "GDP for Top 10 Visited Countries", x = "GDP", y = "Country") +
+  scale_fill_brewer(palette = "Set3")+
   scale_x_discrete(breaks = desired_values)
 ```
 
-In the ridgeline plots above, we see the GDP distribution for the top ten most visited countries in 2022. GDP data dates from 1980 to 2022. We can see that the median GDP of these countries are all quite comparable, with only China, Malaysia, and Turkey having a bit higher medians than the other seven countries. It is interesting to note trends in GDP for countries that can be grouped together. For instance, Italy, Spain, and Denmark may be considered Western and Southern European, and they all have similar trends in GDP distribution, with one stark mode and very small tails. Countries in Eastern Europe, namely Hungary, Greece, Croatia, and even Turkey (though most of Turkey is part of Asia), have similar trends as well, with one main mode, but some trailing data to the left of the mode. The three other Asian countries stand somewhat on their own, as they are all spread far across the continent and have very different economies. It is interesting to note the spread of GDP in Saudi Arabia, meaning that GDP has fluctuated greatly in the country since 1995.
+The ridgeline plot above shows us the distribution of GDP for the top ten most visited countries in 2022. The GDP data spans from 2000 to 2022. From this plot, we can see that China has the highest median GDP of the ten countries. Italy, Denmark, and Canada have the most stark medians, with little tail on either side of the median, meaning there is not much fluctuation in GDP for these countries. Spain and Hungary follow a similar pattern, with just a bit more tails to the left of the median. Greece and Saudi Arabia have the most spread in distribution, with lower peaks and long tails, pointing to the high fluctuation in GDP in the two countries. Croatia and Turkey follow similar distributions as well, with a small mode to the left and a larger mode to the right. Other than China, the other nine countries have similar medians.
 
 ## Travel Contribution to GDP from 2018-2021
 
@@ -212,7 +228,7 @@ ggplot(tourism_gdp_filtered, aes(x = Total, y = fct_reorder(GeoAreaName, Total))
   ggtitle("Avg. Tourism Contribution to GDP between 2008 and 2021") +
   facet_wrap(~TimePeriod) +
   xlab("Average Contribution of Tourism to GDP") +
-  ylab("Country")
+  ylab("Country")+
   theme_linedraw()
 
 ```
@@ -437,28 +453,27 @@ ggplot(disasters_top10_2022, aes(x = reorder(Country, -Count), y = Count, fill =
 ## Happiness Indicators in Top 10 Visited Countries
 
 ```{r}
-GGally::ggparcoord(data=happiness_df,columns = 7:11, scale="std", alphaLines = 0.5)+
-  labs(title = "Happiness indicators in all countries", x = "Indicators", y = "Value")
+GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+
+  labs(title = "Happiness indicators in all countries", x = "Indicators", y = "Value")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-```{r}
-library(devtools)
-#devtools::install_github("timelyportfolio/parcoords", force=TRUE)
+The parallel coordinates plot above shows trends in the global happiness study. From all countries studied, we can see that GDP per capita, social support, and healthy life expectancy seem to be linearly related. Economic freedom and support for citizens unsurprisingly lead to a higher life expectancy. Interestingly, there is a negative trend between freedom to make life choices and generosity, meaning countries with higher perceived freedom to make choices report lower scores for generosity, and vice versa. Similarly, there is another negative trend between generosity and perceptions of corruption. Lower generosity generally coincides with higher perceptions of corruption and vice versa. It is important to note that this data comes from polls and is averaged from every poll taken in the country, but it is still interesting to study how different indicators for happiness are generally related. Now we will see how this relates to tourism.
 
-top_ten_arrivals <- c("Spain","Italy","Turkey","Croatia","Hungary","Denmark","Greece","China","Malaysia","Saudi Arabia")
+```{r}
+top_ten_arrivals <- c("Spain","Italy","Turkey","Croatia","Hungary","Denmark","Greece","China","Canada","Saudi Arabia")
 
 happiness_df <- happiness_df %>%
   rename(Country_name = `Country name`)
 
 happy_ten <- subset(happiness_df, Country_name %in% top_ten_arrivals)
 
-library(plotly)
-library(GGally)
+library(redav)
+happiness_data <- happy_ten[,c(1,6:11)]
+happiness_data <- na.omit(happiness_data)
+draw_biplot(happiness_data)+
+  labs(title = "Happiness Indicators in Most Visited Countries")
 
-p <- ggparcoord(happy_ten,
-    columns = 7:11, group = 1, scale = "std")+
-  labs(title = "Happiness Indicators in Top 10 Visited Countries", x = "Indicator", y = "Value")+
-  theme(axis.text.y = element_text(angle = 45, hjust = 1))
-
-ggplotly(p)
 ```
+
+In the PCA chart above, we see how the chosen happiness indicators and related, and which indicators are most important in the top 10 most visited countries. We can see that Denmark and Canada have similar levels for each happiness indicator, with the highest values for generosity, social support, and logged GDP per capita. Greece has the lowest rating for generosity and logged GDP per capita, and the highest for perceptions of corruption. It is very interesting to note that when looking at logged GDP per capita, China is number nine out of ten, compared to having the top GDP in the ridgeline plot above. China also has very little social support and the second lowest health life expectancy, only better than Saudi Arabia. Spain falls somewhat central to most indicators, which is surprising as the most visited country in 2022. Perhaps the lack of extremes attracts visitors.
