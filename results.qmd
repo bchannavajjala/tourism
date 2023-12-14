@@ -156,7 +156,6 @@ long_data_GDP$Year <- as.Date(long_data_GDP$Year, format='%Y')
 happiness_df <- read_excel("DataForFigure2.1WHR2023.xls")
 
 happiness_df<-as.data.frame(happiness_df)
-happiness_df
 ```
 
 ```{r}
@@ -178,6 +177,7 @@ library(ggridges)
 top_ten_arrivals <- c("Spain","Italy","Türkiye, Republic of","Croatia","Hungary","Denmark","Greece","China, People's Republic of","Canada","Saudi Arabia")
 
 GDP_ten <- subset(long_data_GDP, Country %in% top_ten_arrivals)
+GDP_ten <- subset(GDP_ten, Year >= '2000-12-01')
 GDP_ten$GDP <- as.numeric(GDP_ten$GDP)
 
 desired_values <- c(-15, -10, -5, 0, 5, 10, 15) 
@@ -186,7 +186,7 @@ ggplot(GDP_ten, aes(x = GDP, y = Country, fill = Country)) +
   geom_density_ridges(scale = 1.5, alpha = 0.6) +
   theme_ridges() +
   labs(title = "Top 10 Arrivals GDP", x = "GDP", y = "Country") +
-  scale_fill_brewer(palette = "Set1")
+  scale_fill_brewer(palette = "Set3") +
   scale_x_discrete(breaks = desired_values)
 ```
 
@@ -196,32 +196,9 @@ GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0
 ```
 
 ```{r}
-library(devtools)
-#devtools::install_github("timelyportfolio/parcoords", force=TRUE)
-
-top_ten_arrivals <- c("Spain","Italy","Turkey","Croatia","Hungary","Denmark","Greece","China","Canada","Saudi Arabia")
-
-happiness_df <- happiness_df %>%
-  rename(Country_name = `Country name`)
-
-happy_ten <- subset(happiness_df, Country_name %in% top_ten_arrivals)
-
-library(plotly)
-library(GGally)
-
-p <- ggparcoord(happy_ten,
-    columns = 6:11, group = 1, scale = "std")+
-  labs(title = "Happiness Indicators in Top 10 Visited Countries", x = "Indicator", y = "Value")+
-  theme(axis.text.y = element_text(angle = 45, hjust = 1))
-
-ggplotly(p)
-```
-
-```{r}
-happiness_data <- happy_ten[,7:11]
+library(redav)
+happiness_data <- happy_ten[,c(1,7:11)]
 happiness_data <- na.omit(happiness_data)
-pca_results <- prcomp(happiness_data, scale. = TRUE)
-
-biplot(pca_results, scale = 0)
+draw_biplot(happiness_data)
 
 ```
