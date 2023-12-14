@@ -458,14 +458,6 @@ disasters_2022_total <- disasters_top10_2022 %>%
   count(Country, wt = Count) %>%
   top_n(10, n)
 
-#Plot top 10 countries
-disasters_2022_total %>%
-  ggplot(aes(x=reorder(Country, -n),y=n)) +
-  geom_bar(stat = "identity",fill = "cornflowerblue") +
-  ggtitle("2022 Climate Disasters for Top Arrival Countries") +
-  xlab("Countries") +
-  ylab("Climate Disaster Count") +
-  theme(axis.text.x = element_text(angle=90, vjust = 0.95, hjust = 1))
 
 #Stacked Bar Chart to break down disaster type
 ggplot(disasters_top10_2022, aes(x = reorder(Country, -Count), y = Count, fill = event_type)) +
@@ -489,9 +481,9 @@ happiness_df<-as.data.frame(happiness_df)
 ### Happiness Indicators in Top 10 Visited Countries
 
 ```{r}
-GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+
+suppressMessages(GGally::ggparcoord(data=happiness_df,columns = 6:11, scale="std", alphaLines = 0.5)+
   labs(title = "Happiness indicators in all countries", x = "Indicators", y = "Value")+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)))
 ```
 
 The parallel coordinates plot above shows trends in the global happiness study. From all countries studied, we can see that GDP per capita, social support, and healthy life expectancy seem to be linearly related. Economic freedom and support for citizens unsurprisingly lead to a higher life expectancy. Interestingly, there is a negative trend between freedom to make life choices and generosity, meaning countries with higher perceived freedom to make choices report lower scores for generosity, and vice versa. Similarly, there is another negative trend between generosity and perceptions of corruption. Lower generosity generally coincides with higher perceptions of corruption and vice versa. It is important to note that this data comes from polls and is averaged from every poll taken in the country, but it is still interesting to study how different indicators for happiness are generally related. Now we will see how this relates to tourism.
