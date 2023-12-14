@@ -286,7 +286,10 @@ ggplot(expenditures_top20_us, aes(x = as.factor(Year), y = Country, fill = Expen
        x = "Year",
        y = "Country",
        fill = "Expenditure")
+})
+```
 
+```{r fig.height = 7, fig.width= 10}
 # Select the top 20 countries excluding the US
 top_countries <-  mean_expenditure_all %>%
   filter(Country != "UNITED STATES OF AMERICA") 
@@ -306,7 +309,6 @@ ggplot(expenditures_top20, aes(x = as.factor(Year), y = Country, fill = Expendit
        y = "Country",
        fill = "Expenditure")
 
-})
 ```
 
 We have seen how tourism effects GDP, now, conversely, we want to see how much certain countries spend on tourism. We will study the top twenty countries in terms of tourism expenditure. In the first heatmap, we can see that the spend on tourism in the United States dwarfs that of almost every country. It is possible that the United States is not noted as one of the most visited countries because, being such a large nation, there is a large amount of tourism within the country, which would not contribute to arrivals. Many other countries see more international arrivals due to their size. due to their size.
