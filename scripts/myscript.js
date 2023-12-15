@@ -16,7 +16,7 @@ const svg = d3.select("div#plot")
 svg.append("rect")
 .attr("width", w)
 .attr("height", h)
-.attr("fill", "rgb(211, 211, 211)");
+.attr("fill", "rgb(230, 230, 230)");
 
 // create plot group
 svg.append("g")
@@ -53,7 +53,7 @@ d3.csv("https://raw.githubusercontent.com/bchannavajjala/tourism/main/inbound_vs
     yAxis = d3.axisLeft()
     .scale(yScale);
 
-  // Generate horizontal gridlines
+  // Create horizontal gridlines
   svg.select("g#plot")
     .selectAll("line.horizontal")
     .data(yScale.ticks())
@@ -67,7 +67,7 @@ d3.csv("https://raw.githubusercontent.com/bchannavajjala/tourism/main/inbound_vs
     .attr("stroke", "#A9A9A9")
     .attr("stroke-width", 1);
 
-  // Generate vertical gridlines
+  // Create vertical gridlines
   svg.select("g#plot")
     .selectAll("line.vertical")
     .data(xScale.ticks())
@@ -215,7 +215,7 @@ d3.csv("https://raw.githubusercontent.com/bchannavajjala/tourism/main/inbound_vs
           yAxis = d3.axisLeft()
           .scale(yScale);
 
-          // Generate horizontal gridlines
+          // Create horizontal gridlines
           svg.select("g#plot")
             .selectAll("line.horizontal")
             .data(yScale.ticks())
@@ -229,7 +229,7 @@ d3.csv("https://raw.githubusercontent.com/bchannavajjala/tourism/main/inbound_vs
             .attr("stroke", "#A9A9A9")
             .attr("stroke-width", 1);
 
-            // Generate vertical gridlines
+            // Create vertical gridlines
             svg.select("g#plot")
               .selectAll("line.vertical")
               .data(xScale.ticks())
@@ -267,3 +267,6 @@ d3.csv("https://raw.githubusercontent.com/bchannavajjala/tourism/main/inbound_vs
   .catch(function(error) {
     console.error("Error loading data:", error);
   });
+
+
+
