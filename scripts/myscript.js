@@ -200,7 +200,7 @@ d3.csv("https://raw.githubusercontent.com/bchannavajjala/tourism/main/inbound_vs
           svg.select("#ylab")
             .text("2021 Tourism Contribution to GDP")
 
-      } else {
+      } else { //If the user selects 2019
         xScale = d3.scaleLinear()
           .domain([0,d3.max(dataset, d => d.nineteen_inbound)])
           .range([0, innerWidth]);
