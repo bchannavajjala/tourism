@@ -175,16 +175,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#tourism-data" id="toc-tourism-data" class="nav-link active" data-scroll-target="#tourism-data"><span class="header-section-number">3</span> Tourism Data</a>
+  <li><a href="#tourism-data" id="toc-tourism-data" class="nav-link active" data-scroll-target="#tourism-data"><span class="header-section-number">2.1</span> Tourism Data</a>
   <ul class="collapse">
-  <li><a href="#technical-description" id="toc-technical-description" class="nav-link" data-scroll-target="#technical-description"><span class="header-section-number">3.1</span> Technical Description</a></li>
-  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="header-section-number">3.2</span> Research Plan</a></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">3.3</span> Missing value analysis</a>
-  <ul class="collapse">
-  <li><a href="#unwto-tourism-data" id="toc-unwto-tourism-data" class="nav-link" data-scroll-target="#unwto-tourism-data"><span class="header-section-number">3.3.1</span> UNWTO Tourism Data</a></li>
-  <li><a href="#climate-related-disasters-data" id="toc-climate-related-disasters-data" class="nav-link" data-scroll-target="#climate-related-disasters-data"><span class="header-section-number">3.3.2</span> Climate-related Disasters Data</a></li>
-  <li><a href="#gdp-data" id="toc-gdp-data" class="nav-link" data-scroll-target="#gdp-data"><span class="header-section-number">3.3.3</span> GDP Data</a></li>
-  </ul></li>
+  <li><a href="#technical-description" id="toc-technical-description" class="nav-link" data-scroll-target="#technical-description"><span class="header-section-number">2.1.1</span> Technical Description</a></li>
+  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="header-section-number">2.1.2</span> Research Plan</a></li>
+  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.1.3</span> Missing value analysis</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/bchannavajjala/tourism/edit/main/data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/bchannavajjala/tourism/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -209,18 +204,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="tourism-data" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Tourism Data</h1>
-<section id="technical-description" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">3.1</span> Technical Description</h2>
+<section id="tourism-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="tourism-data"><span class="header-section-number">2.1</span> Tourism Data</h2>
+<section id="technical-description" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1.1</span> Technical Description</h3>
 <p>For our project, we will use data on global tourism and related variables and indicators to study the effect tourism has on countries around the world. The main tourism-specific data that we will be using comes from the United Nations World Tourism Organization (<a href="https://www.unwto.org/tourism-statistics/key-tourism-statistics">UNWTO</a>). We will draw data from their “Tourism Statistics Database”, from which we will use five tables containing tourism indicators for each country. The tables have data for Inbound Tourism, Domestic Tourism, Outbound Tourism, Tourism Industries, and Employment. Inbound, Domestic, and Outbound Tourism tables have data on arrivals, accommodation, expenditure, and departures. We will focus on inbound arrivals and employment. The data provides indicators by country, with values (in thousands) for each indicator from 1995-2022. Countries are listed in the same column as the indicators, with the same indicators for each country following in the rows after the country name. Therefore, to make this data useful for graphing, we will need to do quite a bit of engineering to organize indicators. The data is collected yearly from countries by the UNWTO, with the most recent data update taking place October 2023. However, our data is yearly and thus only goes until 2022, since the full data for 2023 is not yet available. Further, the data requires that each individual country accurately and routinely tracks tourism data and then reports it to the United Nations, and thus there is a large amount of missing data for many countries, especially in earlier years. In fact, the UN did not outline their <a href="https://unstats.un.org/unsd/publication/seriesm/seriesm_83rev1e.pdf">International Recommendations for Tourism Statistics (IRTS 2008)</a> until 2008, and the World Tourism Organization only became an agency of the UN in 2004, so data was not as regulated before these years.</p>
 <p>To study the effects that tourism has on the economy, climate, and happiness, we will use supplemental data. For economic factors, we will study employment from the UNWTO data, and will also use data from the International Monetary Fund (<a href="https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/OEMDC/ADVEC/WEOWORLD">IMF</a>) to analyze the relationship between tourism and GDP. The data is a simple table where rows are countries, columns are the years from 1980 to 2028, with data from 2023 to 2028 being projected values.The values in the table represent actual GDP values for each country and year. The data comes from the IMF’s World Economic Outlook report, which is updated yearly. The data mapper from which we are pulling data only includes some indicators from the entire report. Data is collected as accurately as possible by IMF employees, and historical data is updated as more information becomes available. Though the employees of IMF gather data as meticulously as possible, of course there are still gaps. Similarly to tourism data, much of the data is missing in earlier years. Our downloaded data was updated October 2023.</p>
 <p>Our climate data also comes from the International Monetary Fund, from their <a href="https://climatedata.imf.org/">Climate Change Dashboard</a>, which offers global data on many climate change indicators. We will be studying <a href="https://climatedata.imf.org/datasets/b13b69ee0dde43a99c811f592af4e821/explore">Climate-related Disasters data</a>. This data is organized similarly to the GDP data, with rows being for countries and columns for years 1980-2022. The values in the table indicate the number of climate-related disasters that occurred in each country for each year. Each country has multiple rows, since for each there is a row for drought, temperature, flood, wildfire, storm, landslide, and total. The data was last updated in April 2023, but data is updated when there is availability of new indicators or methodology, which does not have a set schedule. Again, similar to GDP, data is collected and released by IMF employees to the best of their ability.</p>
 <p>Finally, we will use happiness data from the <a href="https://worldhappiness.report/data/">World Happiness Report</a>, which gathers data from the Gallup World Poll surveys from 2020 to 2022. Unfortunately, the average sample size from the poll is 1,000 people per country, and thus the data is far from conclusive. However, the data offers multiple “happiness indicators” from the poll for any participating countries. Some examples are Social support data, a Healthy Life score, a value for “Freedom to make life choices”, and more. Data is quantitative, using an average score from the Gallup poll. The report has been released most years since 2012, but we will focus on the most recent report, with data from the 2023 Gallup poll.</p>
 <p>For all data, we will download excel or csv files and read them as data frames. The indicator data (economy, climate, happiness) will not need much engineering beyond missing values. UNWTO data will need to be pivoted. Then, data will be joined by country name to conduct our analysis and create graphs.</p>
 </section>
-<section id="research-plan" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">3.2</span> Research Plan</h2>
+<section id="research-plan" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.1.2</span> Research Plan</h3>
 <p>Based on our multi-faceted approach to understanding tourism, we plan to use the following data sources to answer our research questions:</p>
 <p><strong>Tourism by Country:</strong></p>
 <ul>
@@ -275,10 +270,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
-<section id="missing-value-analysis" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">3.3</span> Missing value analysis</h2>
-<section id="unwto-tourism-data" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="unwto-tourism-data"><span class="header-section-number">3.3.1</span> UNWTO Tourism Data</h3>
+<section id="missing-value-analysis" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.1.3</span> Missing value analysis</h3>
+<section id="unwto-tourism-data" class="level4" data-number="2.1.3.1">
+<h4 data-number="2.1.3.1" class="anchored" data-anchor-id="unwto-tourism-data"><span class="header-section-number">2.1.3.1</span> UNWTO Tourism Data</h4>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -399,8 +394,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>When we just look at total arrivals for inbound arrival data in 2022, we see a lot more values across countries. The data is still quite sparse, so we will still want to study countries only if they have at least one value in the year we are studying, but this suggests that “Total arrivals” could be a better case study than looking at all different types of inbound arrivals.</p>
 </section>
-<section id="climate-related-disasters-data" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="climate-related-disasters-data"><span class="header-section-number">3.3.2</span> Climate-related Disasters Data</h3>
+<section id="climate-related-disasters-data" class="level4" data-number="2.1.3.2">
+<h4 data-number="2.1.3.2" class="anchored" data-anchor-id="climate-related-disasters-data"><span class="header-section-number">2.1.3.2</span> Climate-related Disasters Data</h4>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -426,8 +421,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Climate data is also missing a decent amount of data, so we will want to take a similar approach, where we only study those countries with at least one value in the given year. Again, we may want to subset the data to look at a specific severe weather type that may have more values, such as total weather disasters. This missing data can of course be explained by lack of reporting from countries, but it can also be attributed to the fact that many countries may not experience certain severe weather types in any year. For example, temperate countries may not experience extreme temperatures, countries in deserts may not experience floods, etc…</p>
 </section>
-<section id="gdp-data" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="gdp-data"><span class="header-section-number">3.3.3</span> GDP Data</h3>
+<section id="gdp-and-happiness-data" class="level4" data-number="2.1.3.3">
+<h4 data-number="2.1.3.3" class="anchored" data-anchor-id="gdp-and-happiness-data"><span class="header-section-number">2.1.3.3</span> GDP and Happiness Data</h4>
 <div class="cell">
 <details>
 <summary>Code</summary>
