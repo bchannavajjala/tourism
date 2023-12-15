@@ -156,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./d3graph.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">d3graph.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -285,165 +285,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read data from excel</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("readxl")</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sheet_names <span class="ot">&lt;-</span> <span class="fu">excel_sheets</span>(<span class="st">"data_raw/unwto-all-data-download_102023.xlsx"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#create a data frame for each sheet and store them in all_dfs</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>all_dfs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sheet_names, <span class="cf">function</span>(sheet) {</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(<span class="st">"data_raw/unwto-all-data-download_102023.xlsx"</span>, <span class="at">sheet =</span> sheet)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>New names:
-• `` -&gt; `...2`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>New names:
-New names:
-New names:
-New names:
-New names:
-New names:
-New names:
-New names:
-New names:
-New names:
-New names:
-New names:
-• `` -&gt; `...2`
-• `` -&gt; `...3`
-• `` -&gt; `...5`
-• `` -&gt; `...6`
-• `` -&gt; `...7`
-• `` -&gt; `...8`
-• `` -&gt; `...9`
-• `` -&gt; `...10`
-• `` -&gt; `...11`
-• `` -&gt; `...12`
-• `` -&gt; `...13`
-• `` -&gt; `...14`
-• `` -&gt; `...15`
-• `` -&gt; `...16`
-• `` -&gt; `...17`
-• `` -&gt; `...18`
-• `` -&gt; `...19`
-• `` -&gt; `...20`
-• `` -&gt; `...21`
-• `` -&gt; `...22`
-• `` -&gt; `...23`
-• `` -&gt; `...24`
-• `` -&gt; `...25`
-• `` -&gt; `...26`
-• `` -&gt; `...27`
-• `` -&gt; `...28`
-• `` -&gt; `...29`
-• `` -&gt; `...30`
-• `` -&gt; `...31`
-• `` -&gt; `...32`
-• `` -&gt; `...33`
-• `` -&gt; `...34`
-• `` -&gt; `...35`
-• `` -&gt; `...36`
-• `` -&gt; `...37`
-• `` -&gt; `...38`
-• `` -&gt; `...39`
-• `` -&gt; `...40`</code></pre>
-</div>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#access the desired dataframe from all_dfs</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(all_dfs[<span class="dv">2</span>])</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning up the data set to remove unnecessary rows and columns, and rename/change type of columns</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cols_to_del <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">3</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[,cols_to_del]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">&lt;-</span> inbound_arrivals[<span class="dv">2</span>, ]</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[<span class="sc">-</span><span class="dv">2</span>, ]</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inbound_arrivals) <span class="ot">&lt;-</span> col_names</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inbound_arrivals)[<span class="fu">names</span>(inbound_arrivals)<span class="sc">==</span><span class="st">"Basic data and indicators"</span>] <span class="ot">&lt;-</span> <span class="st">"Country"</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inbound_arrivals)[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">37</span>]</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span> <span class="fu">ifelse</span>(. <span class="sc">==</span> <span class="st">".."</span>, <span class="cn">NA</span>, .))</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>columns_indices_to_convert <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">36</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(columns_indices_to_convert, as.numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(readxl))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyr))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(sheet_names <span class="ot">&lt;-</span> <span class="fu">excel_sheets</span>(<span class="st">"data_raw/unwto-all-data-download_102023.xlsx"</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#create a data frame for each sheet and store them in all_dfs</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(all_dfs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sheet_names, <span class="cf">function</span>(sheet) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(<span class="st">"data_raw/unwto-all-data-download_102023.xlsx"</span>, <span class="at">sheet =</span> sheet)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace empty rows for country with the last non-empty value until a new value appears</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(<span class="st">"Country"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Merging arrival types into one column</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>columns_to_merge <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>,<span class="st">"5"</span>) </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Merged_Column =</span> <span class="fu">coalesce</span>(<span class="sc">!!!</span><span class="fu">syms</span>(columns_to_merge)))</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>column_names <span class="ot">&lt;-</span> <span class="fu">names</span>(inbound_arrivals)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#moving the merged column to the front of the dataframe</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>last_column <span class="ot">&lt;-</span> column_names[<span class="fu">length</span>(column_names)]</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[, <span class="sc">!</span><span class="fu">names</span>(inbound_arrivals) <span class="sc">%in%</span> columns_to_merge]</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>column_to_move <span class="ot">&lt;-</span> <span class="st">"Merged_Column"</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>new_position <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>{{column_to_move}}) <span class="sc">%&gt;%</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>({{column_to_move}} <span class="sc">:</span><span class="er">=</span> inbound_arrivals[[column_to_move]]) <span class="sc">%&gt;%</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>({{column_to_move}}, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#access the desired dataframe from all_dfs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(all_dfs[<span class="dv">2</span>])</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Cleaning up the data set to remove unnecessary rows and columns, and rename/change type of columns</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>cols_to_del <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[,cols_to_del]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">&lt;-</span> inbound_arrivals[<span class="dv">2</span>, ]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[<span class="sc">-</span><span class="dv">2</span>, ]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inbound_arrivals) <span class="ot">&lt;-</span> col_names</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inbound_arrivals)[<span class="fu">names</span>(inbound_arrivals)<span class="sc">==</span><span class="st">"Basic data and indicators"</span>] <span class="ot">&lt;-</span> <span class="st">"Country"</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(inbound_arrivals)[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">37</span>]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span> <span class="fu">ifelse</span>(. <span class="sc">==</span> <span class="st">".."</span>, <span class="cn">NA</span>, .))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>columns_indices_to_convert <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">36</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(columns_indices_to_convert, as.numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace empty rows for country with the last non-empty value until a new value appears</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(<span class="st">"Country"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Merging arrival types into one column</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>columns_to_merge <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>,<span class="st">"5"</span>) </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Merged_Column =</span> <span class="fu">coalesce</span>(<span class="sc">!!!</span><span class="fu">syms</span>(columns_to_merge)))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>column_names <span class="ot">&lt;-</span> <span class="fu">names</span>(inbound_arrivals)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#moving the merged column to the front of the dataframe</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>last_column <span class="ot">&lt;-</span> column_names[<span class="fu">length</span>(column_names)]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals[, <span class="sc">!</span><span class="fu">names</span>(inbound_arrivals) <span class="sc">%in%</span> columns_to_merge]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>column_to_move <span class="ot">&lt;-</span> <span class="st">"Merged_Column"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>new_position <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>inbound_arrivals <span class="ot">&lt;-</span> inbound_arrivals <span class="sc">%&gt;%</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>{{column_to_move}}) <span class="sc">%&gt;%</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>({{column_to_move}} <span class="sc">:</span><span class="er">=</span> inbound_arrivals[[column_to_move]]) <span class="sc">%&gt;%</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>({{column_to_move}}, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-fig.scale="5">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulate data to show missing values in a given year</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>inbound_arrivals<span class="sc">$</span>Missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(inbound_arrivals<span class="sc">$</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>inbound_arrivals<span class="sc">$</span>Data_in_2022 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> inbound_arrivals, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> Data_in_2022, <span class="at">fill=</span>Missing)) <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red3"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"lightgreen"</span>)) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulate data to show missing values in a given year</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>inbound_arrivals<span class="sc">$</span>Missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(inbound_arrivals<span class="sc">$</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>inbound_arrivals<span class="sc">$</span>Data_in_2022 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> inbound_arrivals, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> Data_in_2022, <span class="at">fill=</span>Missing)) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red3"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"lightgreen"</span>)) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -453,17 +381,17 @@ New names:
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#subset for total arrivals rather than all arrival types</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>total_inbound <span class="ot">&lt;-</span> <span class="fu">subset</span>(inbound_arrivals, inbound_arrivals<span class="sc">$</span>Merged_Column <span class="sc">==</span><span class="st">"Total arrivals"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>total_inbound<span class="sc">$</span>Missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(total_inbound<span class="sc">$</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>total_inbound<span class="sc">$</span>Total_arrival_data_in_2022 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulate data to show missing values in a given year</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> total_inbound, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> Total_arrival_data_in_2022, <span class="at">fill=</span>Missing)) <span class="sc">+</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red3"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"lightgreen"</span>)) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#subset for total arrivals rather than all arrival types</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>total_inbound <span class="ot">&lt;-</span> <span class="fu">subset</span>(inbound_arrivals, inbound_arrivals<span class="sc">$</span>Merged_Column <span class="sc">==</span><span class="st">"Total arrivals"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>total_inbound<span class="sc">$</span>Missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(total_inbound<span class="sc">$</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>total_inbound<span class="sc">$</span>Total_arrival_data_in_2022 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulate data to show missing values in a given year</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> total_inbound, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> Total_arrival_data_in_2022, <span class="at">fill=</span>Missing)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red3"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"lightgreen"</span>)) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
@@ -476,21 +404,21 @@ New names:
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>climate_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data_raw/Climate-related_Disasters_Frequency.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>climate_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data_raw/Climate-related_Disasters_Frequency.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulate data to show missing values in a given year</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>climate_df<span class="sc">$</span>Missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(climate_df<span class="sc">$</span>F2022)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>climate_df<span class="sc">$</span>Data_in_2022 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> climate_df, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> Data_in_2022, <span class="at">fill=</span>Missing)) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red3"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span><span class="st">"lightgreen"</span>)) <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulate data to show missing values in a given year</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>climate_df<span class="sc">$</span>Missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(climate_df<span class="sc">$</span>F2022)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>climate_df<span class="sc">$</span>Data_in_2022 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> climate_df, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> Data_in_2022, <span class="at">fill=</span>Missing)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red3"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span><span class="st">"lightgreen"</span>)) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
@@ -503,22 +431,22 @@ New names:
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>GDP_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_raw/imf-dm-export-20231214.xls"</span>) </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>GDP_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(GDP_df[<span class="sc">-</span><span class="dv">1</span>,])</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(GDP_df)[<span class="fu">names</span>(GDP_df)<span class="sc">==</span><span class="st">"Real GDP growth (Annual percent change)"</span>] <span class="ot">&lt;-</span> <span class="st">"Country"</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>GDP_df <span class="ot">&lt;-</span> GDP_df <span class="sc">%&gt;%</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span> <span class="fu">ifelse</span>(. <span class="sc">==</span> <span class="st">"no data"</span>, <span class="cn">NA</span>, .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>GDP_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_raw/imf-dm-export-20231214.xls"</span>) </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>GDP_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(GDP_df[<span class="sc">-</span><span class="dv">1</span>,])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(GDP_df)[<span class="fu">names</span>(GDP_df)<span class="sc">==</span><span class="st">"Real GDP growth (Annual percent change)"</span>] <span class="ot">&lt;-</span> <span class="st">"Country"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>GDP_df <span class="ot">&lt;-</span> GDP_df <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span> <span class="fu">ifelse</span>(. <span class="sc">==</span> <span class="st">"no data"</span>, <span class="cn">NA</span>, .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>happiness_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_raw/DataForFigure2.1WHR2023.xls"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>happiness_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(happiness_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>happiness_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_raw/DataForFigure2.1WHR2023.xls"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>happiness_df<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(happiness_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Our GDP and Happiness data are very well populated. GDP is particularly well documented in later years. The happiness study only draws from countries who respond to the survey, and values are averages across those countries, so there is no missing data.</p>

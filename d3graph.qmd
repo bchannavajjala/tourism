@@ -20,5 +20,15 @@ Interactive Graph of Tourism Contribution to GDP vs Inbound Tourist Arrivals
 <p id="color" style= "color: black; font-size: 12px; margin-top: 10px; margin-bottom: 10px;">
   **Mouse over the data points to see which countries they correspond to** </p>
 
+<p id="color" style= "color: black; font-size: 14px; margin-top: 50px; margin-bottom: 30px;">
+  This graph explores the relationship between Inbound Tourism Arrivals and the contribution of Tourism to GDP for select countries. We chose to explore the years 2019 and 2021, as they are the years directly before and after the COVID-19 was declared a pandemic in 2020. We were only able to find complete data on Tourism GDP Contribution and Inbound Tourism Arrivals for the countries mapped in this graph. This graph was inspired by the "Weather forecast for Columbia University" graph created by Professor Joyce Robbins. </p>
+  
+<p id="color" style= "color: black; font-size: 14px>For more information, please refer to the following data sources:</p>
+<ul>
+  <li><a href="https://www.unwto.org/tourism-statistics/key-tourism-statistics" target="_blank">Inbound Tourism Data source</a></li>
+  <li><a href="https://www.unwto.org/tourism-statistics/economic-contribution-SDG" target="_blank">Tourism Contribution to GDP Data source</a></li>
+</ul>
+
+
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="scripts/myscript.js"></script>

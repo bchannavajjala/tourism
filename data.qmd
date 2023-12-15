@@ -86,16 +86,16 @@ Based on our multi-faceted approach to understanding tourism, we plan to use the
 #Read data from excel
 #install.packages("readxl")
 
-library(readxl)
-library(tidyr)
-library(dplyr)
+suppressMessages(library(readxl))
+suppressMessages(library(tidyr))
+suppressMessages(library(dplyr))
 
-sheet_names <- excel_sheets("data_raw/unwto-all-data-download_102023.xlsx")
+suppressMessages(sheet_names <- excel_sheets("data_raw/unwto-all-data-download_102023.xlsx"))
 
 #create a data frame for each sheet and store them in all_dfs
-all_dfs <- lapply(sheet_names, function(sheet) {
+suppressMessages(all_dfs <- lapply(sheet_names, function(sheet) {
   read_excel("data_raw/unwto-all-data-download_102023.xlsx", sheet = sheet)
-})
+}))
 ```
 
 ```{r}
